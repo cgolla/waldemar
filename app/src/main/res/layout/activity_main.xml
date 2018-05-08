@@ -5,6 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- WIKITUDE STUFF -->
+    <com.wikitude.architect.ArchitectView
+        android:id="@+id/architectView_main"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
+
     <!-- SCANSTATUS -->
     <TextView
         android:id="@+id/textView_scanStatus"
@@ -15,13 +21,12 @@
         android:layout_marginTop="20dp"
         android:background="@color/colorPrimaryTransp"
         android:paddingBottom="10dp"
-        android:text="TextView"
+        android:paddingTop="20dp"
+        android:text="Suche Bild"
+        android:textAlignment="center"
         android:textAllCaps="true"
-        android:textSize="@dimen/textsize_large"
-        tools:paddingTop="20dp"
-        tools:text="Suche Bild"
-        tools:textAlignment="center"
-        tools:textColor="@color/colorPrimaryDark" />
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/textsize_large"/>
 
     <!-- HILFE-BUTTON -->
     <ImageButton
@@ -55,11 +60,5 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/textsize_xlarge"
         android:textStyle="bold" />
-
-    <!-- WIKITUDE STUFF -->
-    <com.wikitude.architect.ArchitectView
-        android:id="@+id/architectView_main"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"/>
 
 </RelativeLayout>
