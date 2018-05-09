@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="waldemarapp.waldemar">
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -20,6 +19,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_waldemar"
         android:label="@string/app_name"
+        android:isGame="true"
         android:roundIcon="@mipmap/ic_waldemar"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">

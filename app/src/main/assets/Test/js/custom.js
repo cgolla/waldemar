@@ -27,7 +27,7 @@ var World = {
 			collection is identified by its target name. By using this target name, it is possible
 			to create an AR.ImageTrackable for every target in the target collection.
 		*/
-		this.targetCollectionResource = new AR.TargetCollectionResource("assets/test_targets.wtc", {
+		this.targetCollectionResource = new AR.TargetCollectionResource("assets/waldemar_targets.wtc", {
 		});
 
 		this.tracker = new AR.ImageTracker(this.targetCollectionResource, {
@@ -52,7 +52,7 @@ var World = {
         });
 
 		// add drawable to marker
-		var pageOne = new AR.ImageTrackable(this.tracker, "wimbledon1", {
+		var pageOne = new AR.ImageTrackable(this.tracker, "Waldemar-Icon_v2", {
 		    drawables: {
 		        cam: overlayOne
 		    },
@@ -77,7 +77,7 @@ var World = {
 		/*
 			The AR.ImageTrackable for the second page uses the same tracker but with a different target name and the second overlay.
 		*/
-		var pageTwo = new AR.ImageTrackable(this.tracker, "wimbledon2", {
+		var pageTwo = new AR.ImageTrackable(this.tracker, "EntenteichPreview", {
 			drawables: {
 				cam: overlayTwo
 			},
