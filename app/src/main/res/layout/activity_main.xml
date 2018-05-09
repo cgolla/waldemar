@@ -12,7 +12,7 @@
         android:layout_height="fill_parent"/>
 
     <!-- SCANSTATUS -->
-    <TextView
+   <!-- <TextView
         android:id="@+id/textView_scanStatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,11 +22,12 @@
         android:background="@color/colorPrimaryTransp"
         android:paddingBottom="10dp"
         android:paddingTop="20dp"
-        android:text="Suche Bild"
+        android:text="@string/scanstatus_scanning"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/textsize_large"/>
+        android:textSize="@dimen/textsize_large"
+        android:visibility="invisible"/>-->
 
     <!-- HILFE-BUTTON -->
     <ImageButton
@@ -34,12 +35,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/textView_scanStatus"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"
         android:background="@color/colorTransparent"
         android:minHeight="50dp"
         android:minWidth="50dp"
+        android:visibility="invisible"
         app:srcCompat="@android:drawable/btn_star_big_on" />
 
     <!-- START/STOP BUTTON -->
@@ -55,7 +56,7 @@
         android:paddingEnd="50dp"
         android:paddingStart="50dp"
         android:paddingTop="@dimen/spacing_medium"
-        android:text="Start"
+        android:text="@string/scanbtn_start"
         android:textAllCaps="true"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/textsize_xlarge"

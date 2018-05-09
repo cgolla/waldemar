@@ -7,6 +7,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.wikitude.architect.ArchitectStartupConfiguration;
 import com.wikitude.architect.ArchitectView;
@@ -21,31 +24,17 @@ import waldemarapp.waldemar.R;
 public class MainActivity extends AppCompatActivity {
 
     /*========== VARS ===============================*/
+    // Statics
     private static final String WIKITUDE_KEY = "Hp/fXCJzZARFV7BHmgN9jCn6OBerUtUPX4mF+2gHUV8zfq1tyxUWdrrnGodkDrM5mcqfq8H5udGDcHVJ/M/Hvezoa9nH0BaMpW/fRiJxFr/A4SWaL5Rokl80uazjrJvGX1WrE/OGVVKYkwO9N33KPbZ0MbHp4chQB95Z7M8k1kNTYWx0ZWRfX6XJ+mvnPZ8m15Lu5AQutwKqPx4HGlN1S2rmFw81DERjkY3l2M8Ek4fiK7cMPw2eH6BiBihHRi1a2eGBZ1eA6v8yONwKVSdPp6ScIClHTi94tRfixwg3ORDh/eWIKUJF49mTzMw6D+iqekHmWK3l4V6MUuNCmYvkzTz8gRFQMe+QAspnV50k9guTiIflynztBnIZc8XdfUMBKra8HMLyKqUuRqj0OLs3Biv+jAxVHJvJdgo2BcLAaXVysySImAwY/oAvmf5+x/xkaAW0excDl2mdEbMVaPd2nPx9/SCAGxwXPefyMKmdVwuO1A8EP4aY69wFKzzzJJbYl4efOjv0QCvRhaRTGsnCz2maJTwZIewO7NvZ6GivMBK6F8HiZKeN/32vfnWx2qtAUjnjMchqVGK3schnSpTfGhkX5qMSwUkxqX3iv6VI6dsUMj0i15m8tGDK/xiLlan8D4vtoEFeVJQgoexYnFWS9HROybQWFH1JnFkdCw0NnWX+4LN7Fd9rUJQPDr/KRLKs3Pl/sCnlq3HMYmikqSXTMg==";
     private static final int CAMERA_PERMISSION_CODE = 221;
 
+    // UI Elements
     private ArchitectView architectView;
+    private ImageButton helpBtn;  //ImageButton to open help with
+    private Button startBtn; //Button to start/stop scanning for markers
 
-    /*========== CUSTOM FUNCTIONS ===============================*/
-
-    /**
-     * You need to check and gain the camera permission to use the architectView.
-     */
-    private void cameraPermission() {
-
-        int permissionCheck = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA);
-
-        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-            // you have the permission, everything is fine
-        } else {
-            // you do not have the permission, so ask for it
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.CAMERA},
-                    CAMERA_PERMISSION_CODE);
-        }
-    }
-
+    // Status
+    private boolean isScanning; //true if wikitude is loading AR World (or tries to)
 
     /*========== LIFE CYCLE EVENTS ===============================*/
 
@@ -61,18 +50,47 @@ public class MainActivity extends AppCompatActivity {
         cameraPermission();
         this.architectView.onCreate( config );
 
+        this.isScanning = false;
+
+        //Init UI elements
+        this.helpBtn = (ImageButton)this.findViewById(R.id.imgBtn_ScanHelp);
+        this.startBtn = (Button)this.findViewById(R.id.btn_scanstart);
+
     }
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        architectView.onPostCreate();
-        try {
-            architectView.load("Test/index.html");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("unable to load html file: " + e.getMessage());
-        }
+        architectView.onPostCreate(); //this is what starts the camera
+
+        //start scanning / loading arWorld on click
+        startBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Scan starten
+                if(!isScanning){
+                    try {
+                        architectView.load("Test/index.html");
+                        startBtn.setText(R.string.scanbtn_stop);
+                        isScanning = true;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        System.out.println("Unable to load html file: " + e.getMessage());
+                    }
+                }
+                // Scan beenden
+                else {
+                    try {
+                        architectView.load(" ");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        System.out.println("Unable to load html file: " + e.getMessage());
+                    }
+                    startBtn.setText(R.string.scanbtn_start);
+                    isScanning = false;
+                }
+            }
+        });
     }
 
     @Override
@@ -93,6 +111,25 @@ public class MainActivity extends AppCompatActivity {
         architectView.onResume();
     }
 
+
+    /*========== CUSTOM FUNCTIONS ===============================*/
+
+    /**
+     * You need to check and gain the camera permission to use the architectView.
+     */
+    private void cameraPermission() {
+        int permissionCheck = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA);
+
+        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+            // you have the permission, everything is fine
+        } else {
+            // you do not have the permission, so ask for it
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA},
+                    CAMERA_PERMISSION_CODE);
+        }
+    }
 
 
     /*========== GETTER & SETTER ===============================*/

@@ -1,3 +1,6 @@
+var textScanning = "Suche Marker...";
+var textFound = "Marker gefunden!";
+
 var World = {
 	loaded: false,
 
@@ -53,10 +56,11 @@ var World = {
 		    drawables: {
 		        cam: overlayOne
 		    },
-		    onImageRecognized: this.removeLoadingBar,
-                        onError: function(errorMessage) {
-                        	alert(errorMessage);
-                        }
+		    onImageRecognized: this.setScanStatusFound,
+			onImageLost: this.setScanStatusLost,
+            onError: function(errorMessage) {
+                alert(errorMessage);
+            }
 		});
 
 		/*
@@ -77,24 +81,33 @@ var World = {
 			drawables: {
 				cam: overlayTwo
 			},
-			onImageRecognized: this.removeLoadingBar,
+			onImageRecognized: this.setScanStatusFound,
+			onImageLost: this.setScanStatusLost,
             onError: function(errorMessage) {
             	alert(errorMessage);
             }
 		});
 	},
 
-	removeLoadingBar: function() {
-		if (!World.loaded) {
-			var e = document.getElementById('loadingMessage');
-			e.parentElement.removeChild(e);
+	setScanStatusFound: function() {
+		//if (!World.loaded) {
+			$(".scanStatusWrap p").html(textFound);
+			setTimeout(function(){
+	        	$(".scanStatusWrap").hide("slow");
+	        }, 2000);
+
 			World.loaded = true;
-		}
+		//}
+	},
+
+	setScanStatusLost: function() {
+			$(".scanStatusWrap").show("slow");
+			$(".scanStatusWrap p").html(textScanning);
 	},
 
     //Once the tracker loaded all its target images, the function worldLoaded() is called.
 	worldLoaded: function worldLoadedFn() {
-        document.getElementById("test").innerHTML = "The world is loaded!!";
+        $(".scanStatusWrap").show("slow");
 	}
 };
 

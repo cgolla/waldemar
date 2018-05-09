@@ -1,0 +1,28 @@
+/*BASICS*/
+html, body{
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+
+
+/*SCANSTATUS*/
+.scanStatusWrap{
+	background-color: rgba(255, 255, 255, .5);
+	color: #0064a8;
+	display: none;
+	font-size: 50px;
+	margin-top: 20px;
+	padding: 10px;
+	text-align: center;
+	width: calc(100% - 20px); /*20px = padding*/
+}
+
+.displayFrame{
+	display: block;
+	width: 100%;
+	height: 100%;
+	border: 60px solid rgba(94, 167, 218, .5);
+}

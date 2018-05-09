@@ -1,7 +1,15 @@
 <resources>
     <string name="app_name">WaldemAR</string>
 
-    <string name="title_activity_main">MainActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <!-- START ACTIVITY -->
+
+    <!-- MAIN ACTIVITY -->
+    <string name="title_activity_main">AR-Scan</string>
+    <string name="scanstatus_scanning">Suche Bild</string>
+    <string name="scanstatus_success">Bild gefunden!</string>
+    <string name="scanbtn_start">Start</string>
+    <string name="scanbtn_stop">Stop</string>
+
+
+    <!-- HELP -->
 </resources>
