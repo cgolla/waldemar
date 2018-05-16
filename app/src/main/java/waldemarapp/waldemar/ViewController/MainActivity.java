@@ -1,6 +1,7 @@
 package waldemarapp.waldemar.ViewController;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -16,6 +17,7 @@ import com.wikitude.architect.ArchitectView;
 
 import java.io.IOException;
 
+import waldemarapp.waldemar.Helper.Helper;
 import waldemarapp.waldemar.R;
 
 /**
@@ -35,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
     // Status
     private boolean isScanning; //true if wikitude is loading AR World (or tries to)
+
+    // etc.
+    private Helper Helper;
 
     /*========== LIFE CYCLE EVENTS ===============================*/
 
@@ -56,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
         this.helpBtn = (ImageButton)this.findViewById(R.id.imgBtn_ScanHelp);
         this.startBtn = (Button)this.findViewById(R.id.btn_scanstart);
 
+        // Init Callbacklistener Helper
+        Helper = new Helper(MainActivity.this);
+        architectView.registerWorldLoadedListener(Helper);
+        architectView.addArchitectJavaScriptInterfaceListener(Helper);
+
     }
 
     @Override
@@ -70,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 // Scan starten
                 if(!isScanning){
                     try {
-                        architectView.load("Test/index.html");
+                        architectView.load("prototyp/augmentation/index.html");
                         startBtn.setText(R.string.scanbtn_stop);
                         isScanning = true;
                     } catch (IOException e) {
@@ -114,6 +124,8 @@ public class MainActivity extends AppCompatActivity {
 
     /*========== CUSTOM FUNCTIONS ===============================*/
 
+
+
     /**
      * You need to check and gain the camera permission to use the architectView.
      */
@@ -131,6 +143,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Starts GameHub with Info about the game that's to be started
+    // @param spiel: which game was scanned?
+    public void startGameHub(String spiel) {
+        Intent intent = new Intent(this, GameHubActivity.class);
+        intent.putExtra("spielname", spiel);
+        startActivity(intent);
+    }
 
     /*========== GETTER & SETTER ===============================*/
 }

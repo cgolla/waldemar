@@ -101,7 +101,10 @@ var World = {
 			drawables: {
 				cam: overlayTwo
 			},
-			onImageRecognized: this.setScanStatusFound,
+			onImageRecognized: function(){
+			this.setScanStatusFound;
+			AR.platform.sendJSONObject({parameter:"startGameHub(erna)"});
+			}
 			onImageLost: this.setScanStatusLost,
             onError: function(errorMessage) {
             	alert(errorMessage);
