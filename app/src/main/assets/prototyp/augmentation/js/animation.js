@@ -32,6 +32,6 @@ function startAnimation(animation_name, frames_number){
 
 
 $(document).ready(function(){
-	initAnimation("assets/waldemar_jump.png");
+	initAnimation("assets/animations/waldemar_jump.png");
 	startAnimation("sprite_waldemar_jump", 7);
 });
