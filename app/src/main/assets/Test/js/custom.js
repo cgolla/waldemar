@@ -51,10 +51,30 @@ var World = {
         	}
         });
 
+        // TODO: viewportWidth + Heigth dynamically?
+        var animationHtml = new AR.HtmlDrawable({
+        	uri: "animation.html"
+        }, 1, {
+        	viewportWidth: 300,
+        	viewportHeight: 500,
+        	backgroundColor: "#00000000",
+        	translate: {
+        		x:0,
+        		y:0.25
+        	},
+        	horizontalAnchor: AR.CONST.HORIZONTAL_ANCHOR.CENTER,
+        	verticalAnchor: AR.CONST.VERTICAL_ANCHOR.BOTTOM,
+        	clickThroughEnabled: true,
+        	allowDocumentLocationChanges: false,
+        	onDocumentLocationChanged: function onDocumentLocationChangedFn(uri) {
+        		AR.context.openInBrowser(uri);
+        	}
+        });
+
 		// add drawable to marker
 		var pageOne = new AR.ImageTrackable(this.tracker, "Waldemar-Icon_v2", {
 		    drawables: {
-		        cam: overlayOne
+		        cam: [overlayOne, animationHtml]
 		    },
 		    onImageRecognized: this.setScanStatusFound,
 			onImageLost: this.setScanStatusLost,
