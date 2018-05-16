@@ -83,6 +83,7 @@ var World = {
 			},
 			onImageRecognized: function(){
 			    this.setScanStatusFound;
+			    // sending info about desired game to the listener
 			    AR.platform.sendJSONObject({parameter:"startGameHub(erna)"});
 			},
 			onImageLost: this.setScanStatusLost,
