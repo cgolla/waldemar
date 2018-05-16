@@ -12,7 +12,7 @@ import java.io.File;
 public class GameHubActivity extends AppCompatActivity {
 
     /*========== VARS ===============================*/
-    String spiel;
+    String game;
     Intent intent;
 
 
@@ -30,8 +30,8 @@ public class GameHubActivity extends AppCompatActivity {
         setGame(intent);
 
         try {
-            // read the HTML from the file
-            InputStream fin = getAssets().open("prototyp/games/html/"+spiel+".html");
+            // read the HTML from the file (path is: assets!)
+            InputStream fin = getAssets().open("prototyp/games/html/"+game+".html");
             byte[] buffer = new byte[fin.available()];
             fin.read(buffer);
             fin.close();
@@ -47,10 +47,11 @@ public class GameHubActivity extends AppCompatActivity {
 
     /*========== GETTER & SETTER ===============================*/
 
+    // get the scanned game from the initial intent GameActivityHub was started with
     public void setGame(Intent intent){
         Bundle bundle = intent.getExtras();
         if(bundle != null){
-            spiel = bundle.getString("spielname");
+            game = bundle.getString("name");
         }
     }
 }

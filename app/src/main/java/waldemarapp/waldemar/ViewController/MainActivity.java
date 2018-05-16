@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
     // @param spiel: which game was scanned?
     public void startGameHub(String spiel) {
         Intent intent = new Intent(this, GameHubActivity.class);
-        intent.putExtra("spielname", spiel);
+        intent.putExtra("name", spiel);
         startActivity(intent);
     }
 

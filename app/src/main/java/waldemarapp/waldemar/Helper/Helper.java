@@ -28,6 +28,8 @@ public class Helper implements ArchitectJavaScriptInterfaceListener,ArchitectVie
 
     }
 
+    // Listener for specific intents
+    // (at the moment) used to start a particular game in the GameHubActivity
     @Override
     public void onJSONObjectReceived(JSONObject jsonObject) {
         String s = "";
@@ -36,7 +38,7 @@ public class Helper implements ArchitectJavaScriptInterfaceListener,ArchitectVie
         } catch (JSONException e) {
             e.printStackTrace();
             System.out.println("Error: unable to parse jsonObject");
-        }
+        } // Ernas Entensuchspiel
         if (s.contains("startGameHub(erna)")) {
 
             myMainActivity.startGameHub("erna");
