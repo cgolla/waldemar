@@ -53,7 +53,7 @@ var World = {
 
         // TODO: viewportWidth + Heigth dynamically?
         var animationHtml = new AR.HtmlDrawable({
-        	uri: "animation.html"
+        	uri: "../../basics/animation.html?animationpath=assets\/animations\/waldemar_jump\.png"
         }, 1, {
         	viewportWidth: 300,
         	viewportHeight: 500,

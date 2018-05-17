@@ -22,7 +22,6 @@ function initAnimation(animation_filename, animation_width=300, animation_height
 * @param frames_number: int containing the number of frames the animation has.
 */
 function startAnimation(animation_name, frames_number){
-
 	var css_animation = animation_name + " " + frames_number*0.1 + "s steps("+frames_number+") infinite";
 
 	$(".animationWrap").css({
@@ -32,6 +31,12 @@ function startAnimation(animation_name, frames_number){
 
 
 $(document).ready(function(){
-	initAnimation("assets/animations/waldemar_jump.png");
+
+	//get filename from URL's GET-params
+	var url = new URL(window.location);
+	var animation_path = url.searchParams.get("animationpath");
+	//alert("Path to animation: "+animation_filename);
+
+	initAnimation("../prototyp/augmentation/"+animation_path);
 	startAnimation("sprite_waldemar_jump", 7);
 });

@@ -1,0 +1,14 @@
+@font-face{
+	font-family: "Patrick Hand";
+	src: url("file:///android_res/font/patrick_hand.ttf");
+}
+
+@font-face{
+	font-family: "Chelsea Market";
+	src: url("file:///android_res/font/chelsea_market.ttf");
+}
+
+
+html, body {
+	font-family: "Patrick Hand", "Chelsea Market";
+}

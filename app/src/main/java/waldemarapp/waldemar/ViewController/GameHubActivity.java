@@ -31,7 +31,7 @@ public class GameHubActivity extends AppCompatActivity {
 
         try {
             // read the HTML from the file (path is: assets!)
-            InputStream fin = getAssets().open("prototyp/games/html/"+game+".html");
+            InputStream fin = getAssets().open("prototyp/games/"+game+"/index.html");
             byte[] buffer = new byte[fin.available()];
             fin.read(buffer);
             fin.close();
