@@ -116,7 +116,13 @@ var World = {
 
 	setScanStatusFound: function() {
 		//if (!World.loaded) {
+			$(".displayFrame").fadeIn("slow");
 			$(".scanStatusWrap p").html(textFound);
+			$(".scanStatusWrap").css({
+				"background-color" : "rgba(95, 216, 149, .9)",
+				"color" : "#ffffff"
+			});
+
 			setTimeout(function(){
 	        	$(".scanStatusWrap").hide("slow");
 	        }, 2000);
@@ -126,8 +132,13 @@ var World = {
 	},
 
 	setScanStatusLost: function() {
-			$(".scanStatusWrap").show("slow");
+			$(".displayFrame").fadeOut("fast");
+			$(".scanStatusWrap").css({
+				"background-color" : "rgba(255, 255, 255, .5)",
+				"color" : "#0064a8"
+			});
 			$(".scanStatusWrap p").html(textScanning);
+			$(".scanStatusWrap").show("slow");
 	},
 
     //Once the tracker loaded all its target images, the function worldLoaded() is called.

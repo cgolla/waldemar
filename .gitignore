@@ -9,3 +9,4 @@
 .externalNativeBuild
 ausarbeitung/~$sarbeitung.docx
 *.tmp
+.idea/

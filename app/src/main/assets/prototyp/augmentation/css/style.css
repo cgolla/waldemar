@@ -13,15 +13,17 @@ html, body{
 	background-color: rgba(255, 255, 255, .5);
 	color: #0064a8;
 	display: none;
-	font-size: 50px;
-	margin-top: 20px;
+	font-size: 70px;
 	padding: 10px;
+	position: fixed;
 	text-align: center;
+	top: 0px;
+	transition: background-color .5s ease-in-out 0s, color .2s linear 0s;
 	width: calc(100% - 20px); /*20px = padding*/
 }
 
 .displayFrame{
-	display: block;
+	display: none;
 	width: 100%;
 	height: 100%;
 	border: 60px solid rgba(94, 167, 218, .5);
