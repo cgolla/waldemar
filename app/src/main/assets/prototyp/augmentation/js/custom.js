@@ -52,8 +52,9 @@ var World = {
         });
 
         // TODO: viewportWidth + Heigth dynamically?
+        // animationpath in uri is relative to assets-root
         var animationHtml = new AR.HtmlDrawable({
-        	uri: "../../basics/animation.html?animationpath=assets\/animations\/waldemar_jump\.png"
+        	uri: "file:///android_asset/basics/animation.html?animationpath=prototyp\/augmentation\/assets\/animations\/waldemar_jump\.png"
         }, 1, {
         	viewportWidth: 300,
         	viewportHeight: 500,

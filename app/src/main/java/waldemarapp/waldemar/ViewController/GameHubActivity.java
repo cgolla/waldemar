@@ -29,7 +29,7 @@ public class GameHubActivity extends AppCompatActivity {
         // get the game that was scanned
         setGame(intent);
 
-        try {
+        /*try {
             // read the HTML from the file (path is: assets!)
             InputStream fin = getAssets().open("prototyp/games/"+game+"/index.html");
             byte[] buffer = new byte[fin.available()];
@@ -38,9 +38,13 @@ public class GameHubActivity extends AppCompatActivity {
 
             // load the HTML
             webview.loadData(new String(buffer), "text/html", "UTF-8");
+
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
+
+        // loadData doesn't load CSS, for whatever reason... so we have to use loadUrl
+        webview.loadUrl("file:///android_asset/prototyp/games/"+game+"/index.html");
     }
 
     /*========== CUSTOM FUNCTIONS ===============================*/

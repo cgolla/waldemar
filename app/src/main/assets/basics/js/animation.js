@@ -37,6 +37,6 @@ $(document).ready(function(){
 	var animation_path = url.searchParams.get("animationpath");
 	//alert("Path to animation: "+animation_filename);
 
-	initAnimation("../prototyp/augmentation/"+animation_path);
+	initAnimation("../"+animation_path);
 	startAnimation("sprite_waldemar_jump", 7);
 });
