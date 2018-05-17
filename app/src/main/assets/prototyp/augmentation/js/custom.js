@@ -55,13 +55,13 @@ var World = {
         // animationpath in uri is relative to assets-root
         var animationHtml = new AR.HtmlDrawable({
         	uri: "file:///android_asset/basics/animation.html?animationpath=prototyp\/augmentation\/assets\/animations\/waldemar_jump\.png"
-        }, 1, {
+        }, 2.5 , {
         	viewportWidth: 300,
         	viewportHeight: 500,
         	backgroundColor: "#00000000",
         	translate: {
-        		x:0,
-        		y:0.25
+        		x:0.3,
+        		y:-1.5
         	},
         	horizontalAnchor: AR.CONST.HORIZONTAL_ANCHOR.CENTER,
         	verticalAnchor: AR.CONST.VERTICAL_ANCHOR.BOTTOM,
