@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     /*========== VARS ===============================*/
     // Statics
     private static final String WIKITUDE_KEY = "Hp/fXCJzZARFV7BHmgN9jCn6OBerUtUPX4mF+2gHUV8zfq1tyxUWdrrnGodkDrM5mcqfq8H5udGDcHVJ/M/Hvezoa9nH0BaMpW/fRiJxFr/A4SWaL5Rokl80uazjrJvGX1WrE/OGVVKYkwO9N33KPbZ0MbHp4chQB95Z7M8k1kNTYWx0ZWRfX6XJ+mvnPZ8m15Lu5AQutwKqPx4HGlN1S2rmFw81DERjkY3l2M8Ek4fiK7cMPw2eH6BiBihHRi1a2eGBZ1eA6v8yONwKVSdPp6ScIClHTi94tRfixwg3ORDh/eWIKUJF49mTzMw6D+iqekHmWK3l4V6MUuNCmYvkzTz8gRFQMe+QAspnV50k9guTiIflynztBnIZc8XdfUMBKra8HMLyKqUuRqj0OLs3Biv+jAxVHJvJdgo2BcLAaXVysySImAwY/oAvmf5+x/xkaAW0excDl2mdEbMVaPd2nPx9/SCAGxwXPefyMKmdVwuO1A8EP4aY69wFKzzzJJbYl4efOjv0QCvRhaRTGsnCz2maJTwZIewO7NvZ6GivMBK6F8HiZKeN/32vfnWx2qtAUjnjMchqVGK3schnSpTfGhkX5qMSwUkxqX3iv6VI6dsUMj0i15m8tGDK/xiLlan8D4vtoEFeVJQgoexYnFWS9HROybQWFH1JnFkdCw0NnWX+4LN7Fd9rUJQPDr/KRLKs3Pl/sCnlq3HMYmikqSXTMg==";
-    private static final int CAMERA_PERMISSION_CODE = 221;
+    private static final int CAMERA_PERMISSION_CODE = 221; //random number necessary to request camera permission
 
     // UI Elements
     private ArchitectView architectView;
@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         Helper = new Helper(MainActivity.this);
         architectView.registerWorldLoadedListener(Helper);
         architectView.addArchitectJavaScriptInterfaceListener(Helper);
-
     }
 
     @Override
@@ -125,9 +124,9 @@ public class MainActivity extends AppCompatActivity {
     /*========== CUSTOM FUNCTIONS ===============================*/
 
 
-
     /**
-     * You need to check and gain the camera permission to use the architectView.
+     * Function checks for camera permission and asks for it if it's not granted yet.
+     * Necessary to use the architectView.
      */
     private void cameraPermission() {
         int permissionCheck = ContextCompat.checkSelfPermission(this,
@@ -143,11 +142,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Starts GameHub with Info about the game that's to be started
-    // @param spiel: which game was scanned?
-    public void startGameHub(String spiel) {
+    /**
+    * Starts GameHub with Info about the game that's to be started
+    * @param game: String containing the name of the scanned game.
+    */
+    public void startGameHub(String game) {
         Intent intent = new Intent(this, GameHubActivity.class);
-        intent.putExtra("name", spiel);
+        intent.putExtra("name", game);
         startActivity(intent);
     }
 

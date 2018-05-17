@@ -43,7 +43,7 @@
         android:minHeight="50dp"
         android:minWidth="50dp"
         android:src="@drawable/icon_qmark"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
     <!-- START/STOP BUTTON -->
     <Button
