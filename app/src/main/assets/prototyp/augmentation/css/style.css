@@ -28,3 +28,21 @@ html, body{
 	height: 100%;
 	border: 60px solid rgba(94, 167, 218, .5);
 }
+
+
+/* HELP BUTTON */
+
+.helpButton{
+    position:relative;
+    display:none;
+    left: 90%;
+    top: 20%;
+    width:10%;
+    height:10%;
+}
+
+.helpText{
+    display:none;
+    width:80%;
+
+}

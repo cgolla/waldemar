@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean isScanning; //true if wikitude is loading AR World (or tries to)
 
     // etc.
-    private Helper Helper;
+    private Helper Helper; // Listens for info on what was scanned
 
     /*========== LIFE CYCLE EVENTS ===============================*/
 
