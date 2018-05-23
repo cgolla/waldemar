@@ -80,25 +80,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Scan starten
                 if(!isScanning){
-                    try {
-                        architectView.load("prototyp/augmentation/index.html");
-                        scanBtn.setText(R.string.scanbtn_stop);
-                        isScanning = true;
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        System.out.println("Unable to load html file: " + e.getMessage());
-                    }
+                    startScanning();
                 }
                 // Scan beenden
                 else {
-                    try {
-                        architectView.load(" ");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        System.out.println("Unable to load html file: " + e.getMessage());
-                    }
-                    scanBtn.setText(R.string.scanbtn_start);
-                    isScanning = false;
+                    stopScanning();
                 }
             }
         });
@@ -114,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         architectView.onPause();
+        stopScanning();
     }
 
     @Override
@@ -154,15 +141,48 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void toggleScanButton(String action){
-        if (action == "hide"){
-
+    /**
+     * Functions toggles visisbility of scanBtn between visible and invisible.
+     * @param hide Boolean. Set true if you want to hide the button, false to show it.
+     */
+    public void toggleScanButton(boolean hide){
+        if (hide){
             this.scanBtn.setVisibility(View.INVISIBLE);
         }
         else{
             this.scanBtn.setVisibility(View.VISIBLE);
         }
 
+    }
+
+    /**
+     * Function starts scanning for markers by loading the augmentation HTML. Sets text on scanBtn accordingly.
+     */
+    public void startScanning(){
+        try {
+            architectView.load("prototyp/augmentation/index.html");
+            scanBtn.setText(R.string.scanbtn_stop);
+            // ToDo: animate btn size + position
+            isScanning = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Unable to load html file: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Function stops scanning by loading an empty HTML. Sets text on scanBtn accordingly.
+     */
+    public void stopScanning(){
+        try {
+            architectView.load(" ");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Unable to load html file: " + e.getMessage());
+        }
+        scanBtn.setText(R.string.scanbtn_start);
+        // ToDo: animate btn size + position
+        isScanning = false;
     }
 
     /*========== GETTER & SETTER ===============================*/

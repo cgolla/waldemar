@@ -6,6 +6,7 @@
     <dimen name="spacing_small">5dp</dimen>
     <dimen name="spacing_medium">10dp</dimen>
     <dimen name="spacing_large">25dp</dimen>
+    <dimen name="spacing_xlarge">50dp</dimen>
 
     <dimen name="borderradius">10dp</dimen>
 
@@ -15,5 +16,6 @@
     <dimen name="textsize_medium">14sp</dimen>
     <dimen name="textsize_large">24sp</dimen>
     <dimen name="textsize_xlarge">30sp</dimen>
+    <dimen name="textsize_xxlarge">50sp</dimen>
 
 </resources>

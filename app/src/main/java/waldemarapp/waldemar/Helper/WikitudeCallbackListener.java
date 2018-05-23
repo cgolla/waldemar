@@ -56,14 +56,14 @@ public class WikitudeCallbackListener implements ArchitectJavaScriptInterfaceLis
         else if (s.contains("hideScanButton")){
             myMainActivity.runOnUiThread (new Thread(new Runnable() {
                 public void run() {
-                    myMainActivity.toggleScanButton("hide");
+                    myMainActivity.toggleScanButton(true);
                 }
             }));
         } // toggle Scan-Button to be visible in any other case
         else if (s.contains("showScanButton")){
             myMainActivity.runOnUiThread (new Thread(new Runnable() {
                 public void run() {
-                    myMainActivity.toggleScanButton("show");
+                    myMainActivity.toggleScanButton(false);
                 }
             }));
         }

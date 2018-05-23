@@ -13,7 +13,7 @@ html, body{
 	background-color: rgba(255, 255, 255, .5);
 	color: #0064a8;
 	display: none;
-	font-size: 70px;
+	font-size: 30px;
 	padding: 10px;
 	position: fixed;
 	text-align: center;
@@ -37,8 +37,8 @@ html, body{
     display:none;
     left: 90%;
     top: 20%;
-    width:10%;
-    height:10%;
+    width:50px;
+    height:50px;
 }
 
 .helpText{
