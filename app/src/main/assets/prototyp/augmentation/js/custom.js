@@ -112,6 +112,7 @@ var World = {
             	alert(errorMessage);
             }
 		});
+
 	},
 
 	setScanStatusFound: function() {
@@ -126,7 +127,7 @@ var World = {
 			setTimeout(function(){
 	        	$(".scanStatusWrap").hide("slow");
 	        }, 2000);
-
+            $(".helpButton").hide("fast");
 			World.loaded = true;
 		//}
 	},
@@ -139,12 +140,31 @@ var World = {
 			});
 			$(".scanStatusWrap p").html(textScanning);
 			$(".scanStatusWrap").show("slow");
+
 	},
 
     //Once the tracker loaded all its target images, the function worldLoaded() is called.
 	worldLoaded: function worldLoadedFn() {
         $(".scanStatusWrap").show("slow");
+
+        //show help text, when the help button is clicked
+	    $("body").on("click", ".helpButton", function(){
+		    console.log("Und?");
+		    $(".helpText").fadeIn("slow");
+	    });
+
+    	// show help icon after 5 seconds (if no marker is found)
+    	setTimeout(function(){
+    		$(".helpButton").fadeIn("slow");}, 5000
+    	);
+
+
 	}
+
+
 };
 
+
 World.init();
+
+
