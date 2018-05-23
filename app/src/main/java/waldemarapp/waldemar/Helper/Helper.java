@@ -42,6 +42,20 @@ public class Helper implements ArchitectJavaScriptInterfaceListener,ArchitectVie
         if (s.contains("startGameHub(erna)")) {
 
             myMainActivity.startGameHub("erna");
+        }// toggle Scan-Button to be transparent, when helpText is shown
+        if (s.contains("hideScanButton")){
+            myMainActivity.runOnUiThread (new Thread(new Runnable() {
+                public void run() {
+                    myMainActivity.toggleScanButton("hide");
+                }
+            }));
+        } // toggle Scan-Button to be visible in any other case
+        if (s.contains("showScanButton")){
+            myMainActivity.runOnUiThread (new Thread(new Runnable() {
+                public void run() {
+                    myMainActivity.toggleScanButton("show");
+                }
+            }));
         }
     }
 }
