@@ -10,9 +10,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.File;
 
+import waldemarapp.waldemar.Helper.GameHubJsInterface;
+
 public class GameHubActivity extends AppCompatActivity {
 
     /*========== VARS ===============================*/
+    private static final String TAG = "GameHubActivity"; // Tag for logging in console
+
     String game;
     Intent intent;
 
@@ -31,12 +35,15 @@ public class GameHubActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
         webSettings.setLoadWithOverviewMode(true);
-        webSettings.setUseWideViewPort(true);
+        webSettings.setUseWideViewPort(false);
         webSettings.setBuiltInZoomControls(true);
         webSettings.setDisplayZoomControls(false);
         webSettings.setSupportZoom(true);
         webSettings.setDefaultTextEncodingName("utf-8");
-        webSettings.setTextZoom(200);
+        webSettings.setTextZoom(100);
+
+        // add JsInterface so we can call Android from JS
+        webview.addJavascriptInterface(new GameHubJsInterface(this), "GameHub");
 
         intent = getIntent();
         // get the game that was scanned

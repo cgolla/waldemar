@@ -1,23 +1,33 @@
 package waldemarapp.waldemar.Helper;
 
 
+import android.content.Intent;
+
 import com.wikitude.architect.ArchitectJavaScriptInterfaceListener;
 import com.wikitude.architect.ArchitectView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import waldemarapp.waldemar.ViewController.GameHubActivity;
 import waldemarapp.waldemar.ViewController.MainActivity;
 
-public class Helper implements ArchitectJavaScriptInterfaceListener,ArchitectView.ArchitectWorldLoadedListener{
+public class WikitudeCallbackListener implements ArchitectJavaScriptInterfaceListener,ArchitectView.ArchitectWorldLoadedListener{
+
+
+    /*========== VARS ===============================*/
+    private static final String TAG = "WikitudeCallbackListener"; // Tag for logging in console
 
     private MainActivity myMainActivity = new MainActivity();
 
-    public Helper(MainActivity MainActivity){
+    /*========== CONSTRUCTOR ===============================*/
+
+    public WikitudeCallbackListener(MainActivity MainActivity){
         this.myMainActivity = MainActivity;
         //architectView = new ArchitectView();
     }
 
+    /*========== OVERRIDES ===============================*/
     @Override
     public void worldWasLoaded(String s) {
 
@@ -43,19 +53,20 @@ public class Helper implements ArchitectJavaScriptInterfaceListener,ArchitectVie
 
             myMainActivity.startGameHub("erna");
         }// toggle Scan-Button to be transparent, when helpText is shown
-        if (s.contains("hideScanButton")){
+        else if (s.contains("hideScanButton")){
             myMainActivity.runOnUiThread (new Thread(new Runnable() {
                 public void run() {
                     myMainActivity.toggleScanButton("hide");
                 }
             }));
         } // toggle Scan-Button to be visible in any other case
-        if (s.contains("showScanButton")){
+        else if (s.contains("showScanButton")){
             myMainActivity.runOnUiThread (new Thread(new Runnable() {
                 public void run() {
                     myMainActivity.toggleScanButton("show");
                 }
             }));
         }
+
     }
 }
