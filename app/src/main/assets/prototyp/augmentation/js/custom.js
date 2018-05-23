@@ -156,6 +156,7 @@ var World = {
 	    });
 
 	    // close help text, when the OK-button is clicked
+	    // ! Really slow on Samsung Tablet !
 	    $("body").on("click", ".button-basic", function(){
 	    console.log("Closed for good");
 	    $(".notification-wrap").fadeOut("fast");
