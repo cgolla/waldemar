@@ -44,3 +44,18 @@ html, body {
 	top: 5%;
 	overflow: scroll;
 }
+
+.notification .img-wrap {
+	width: 30%;
+	float: right;
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	max-width: 250px;
+}
+
+.notification p {
+	width: 70%;
+	float: left;
+	font-family: "Roboto", "Ubuntu", "sans-serif";
+}

@@ -99,6 +99,11 @@ body {
 	top: 75vh;
 }
 
+#hideout-3 .kueken,
+#hideout-10 .kueken {
+	margin-top: 20px;
+}
+
 #hideout-10 img{
 	transform: scale(-1,1);
 }
@@ -165,20 +170,4 @@ body {
 
 #karl-heinz {
 	background-image: url("../assets/sprites_karl-heinz.png");
-}
-
-/* notification elements */
-.notification .img-wrap {
-	width: 30%;
-	float: right;
-	position: absolute;
-	bottom: 0px;
-	right: 0px;
-	max-width: 250px;
-}
-
-.notification p {
-	width: 70%;
-	float: left;
-	font-family: "Roboto", "Ubuntu", "sans-serif";
 }
