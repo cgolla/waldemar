@@ -20,12 +20,12 @@ $(document).ready(function(){
 		if($(this).hasClass("hasDuckling")){
 			duckling_counter++;
 			$(this).removeClass("hasDuckling");
-			$(this).find(".kueken").hide("slow");
+			$(this).find(".kueken").css("z-index", "10").delay(800).hide("slow");
 		}
 
 		// if all ducklings have been found, YAY!
 		if(duckling_counter == ducklings.length){
-			alert("Gewonnen!");
+			$(".notification-wrap").delay(1200).show("fast");
 		}
 	});
 

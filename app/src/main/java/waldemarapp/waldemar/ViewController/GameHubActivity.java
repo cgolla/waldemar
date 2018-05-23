@@ -3,6 +3,7 @@ package waldemarapp.waldemar.ViewController;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import java.io.IOException;
@@ -24,6 +25,17 @@ public class GameHubActivity extends AppCompatActivity {
         // setContentView(R.layout.activity_game_hub);
         WebView webview = new WebView(this);
         setContentView(webview);
+
+        // some standardsettings so webview behaves properly
+        WebSettings webSettings = webview.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(false);
+        webSettings.setSupportZoom(true);
+        webSettings.setDefaultTextEncodingName("utf-8");
 
         intent = getIntent();
         // get the game that was scanned
