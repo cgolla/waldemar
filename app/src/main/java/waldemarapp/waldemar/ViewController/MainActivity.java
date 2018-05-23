@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     // UI Elements
     private ArchitectView architectView;
     private ImageButton helpBtn;  //ImageButton to open help with
-    private Button startBtn; //Button to start/stop scanning for markers
+    private Button scanBtn; //Button to start/stop scanning for markers
 
     // Status
     private boolean isScanning; //true if wikitude is loading AR World (or tries to)
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Init UI elements
         this.helpBtn = (ImageButton)this.findViewById(R.id.imgBtn_ScanHelp);
-        this.startBtn = (Button)this.findViewById(R.id.btn_scanstart);
+        this.scanBtn = (Button)this.findViewById(R.id.btn_scanstart);
 
         // Init Callbacklistener Helper
         Helper = new Helper(MainActivity.this);
@@ -73,14 +73,14 @@ public class MainActivity extends AppCompatActivity {
         architectView.onPostCreate(); //this is what starts the camera
 
         //start scanning / loading arWorld on click
-        startBtn.setOnClickListener(new View.OnClickListener() {
+        scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Scan starten
                 if(!isScanning){
                     try {
                         architectView.load("prototyp/augmentation/index.html");
-                        startBtn.setText(R.string.scanbtn_stop);
+                        scanBtn.setText(R.string.scanbtn_stop);
                         isScanning = true;
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                         System.out.println("Unable to load html file: " + e.getMessage());
                     }
-                    startBtn.setText(R.string.scanbtn_start);
+                    scanBtn.setText(R.string.scanbtn_start);
                     isScanning = false;
                 }
             }
@@ -150,6 +150,17 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GameHubActivity.class);
         intent.putExtra("name", game);
         startActivity(intent);
+    }
+
+    public void toggleScanButton(String action){
+        if (action == "hide"){
+
+            this.scanBtn.setVisibility(View.INVISIBLE);
+        }
+        else{
+            this.scanBtn.setVisibility(View.VISIBLE);
+        }
+
     }
 
     /*========== GETTER & SETTER ===============================*/
