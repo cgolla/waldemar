@@ -36,6 +36,7 @@ public class GameHubActivity extends AppCompatActivity {
         webSettings.setDisplayZoomControls(false);
         webSettings.setSupportZoom(true);
         webSettings.setDefaultTextEncodingName("utf-8");
+        webSettings.setTextZoom(200);
 
         intent = getIntent();
         // get the game that was scanned
