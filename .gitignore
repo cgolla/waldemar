@@ -11,3 +11,5 @@ ausarbeitung/~$sarbeitung.docx
 *.tmp
 .idea/
 *.kra
+~$*
+*.png~
