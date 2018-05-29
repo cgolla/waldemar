@@ -25,8 +25,8 @@ html, body{
 .displayFrame{
 	display: none;
 	width: 100%;
-	height: calc(100% + 80px);
-	border: 60px solid rgba(94, 167, 218, .5);
+	height: calc(100% + 50px);
+	border: 30px solid rgba(94, 167, 218, .5);
 }
 
 

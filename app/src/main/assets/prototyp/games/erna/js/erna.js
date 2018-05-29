@@ -1,7 +1,7 @@
 // ======= VARS
 
 var ducklings = ["#karl", "#karl-heinz", "#karlotta"]; //selectors for duckling-elements
-var hideout_base_selector = "#hideout-"; //baseselector for hideouts, will be completed with numbers
+var hideout_base_selector = "#hideout-"; //baseselector for hideouts, will be completed with ints (hideout_number)
 var hideout_number = 7; // number of hideouts. Is automatically counted once document is readey.
 var duckling_counter = 0; //number of ducklings that have already been discovered
 

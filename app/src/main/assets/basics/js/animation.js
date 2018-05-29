@@ -3,6 +3,7 @@
 * @param animation_filename: String containing path to a sprite-animation (e.g. a png)
 * @param animation_width: int containing the width of the animation. Default is 300 (px)
 * @param animation_height: int containing the height of the animation. Default is 500 (px)
+// TODO: change all those params into an options-object
 */
 function initAnimation(animation_filename, animation_width=300, animation_height=500){
 	
@@ -38,5 +39,6 @@ $(document).ready(function(){
 	//alert("Path to animation: "+animation_filename);
 
 	initAnimation("../"+animation_path);
+	//initAnimation("../prototyp/augmentation/assets/animations/waldemar_jump.png");
 	startAnimation("sprite_waldemar_jump", 7);
 });

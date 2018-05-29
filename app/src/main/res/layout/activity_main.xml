@@ -52,14 +52,15 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:background="@drawable/shape_roundedrectangle"
-        android:paddingBottom="@dimen/spacing_large"
-        android:paddingEnd="@dimen/spacing_xlarge"
-        android:paddingStart="@dimen/spacing_xlarge"
-        android:paddingTop="@dimen/spacing_large"
+        android:paddingBottom="@dimen/spacing_medium"
+        android:paddingEnd="@dimen/spacing_large"
+        android:paddingStart="@dimen/spacing_large"
+        android:paddingTop="@dimen/spacing_medium"
         android:text="@string/scanbtn_start"
         android:textAllCaps="true"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/textsize_xxlarge"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:alpha="0"/>
 
 </RelativeLayout>

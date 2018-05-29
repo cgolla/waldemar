@@ -74,6 +74,12 @@ public class MainActivity extends AppCompatActivity {
         super.onPostCreate(savedInstanceState);
         architectView.onPostCreate(); //this is what starts the camera
 
+        //scanBtn verzögert einblenden (gibt Wikitude Zeit zum Laden)
+        scanBtn.animate()
+                .alpha(1.0f)
+                .setStartDelay(3500)
+                .setDuration(700);
+
         //start scanning / loading arWorld on click
         scanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,8 +167,16 @@ public class MainActivity extends AppCompatActivity {
     public void startScanning(){
         try {
             architectView.load("prototyp/augmentation/index.html");
+
+            // set Btn Text to STOP & animate it to be smaller/further down
             scanBtn.setText(R.string.scanbtn_stop);
-            // ToDo: animate btn size + position
+            scanBtn.animate()
+                    .scaleX(0.5f)
+                    .scaleY(0.5f)
+                    .translationY(750f)
+                    .setStartDelay(0)
+                    .setDuration(200);
+
             isScanning = true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -180,8 +194,16 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
             System.out.println("Unable to load html file: " + e.getMessage());
         }
+
+        // set Btn Text to START & animate back to original size/position
         scanBtn.setText(R.string.scanbtn_start);
-        // ToDo: animate btn size + position
+        scanBtn.animate()
+                .scaleX(1.0f)
+                .scaleY(1.0f)
+                .translationY(0f)
+                .setStartDelay(0)
+                .setDuration(200);
+
         isScanning = false;
     }
 
