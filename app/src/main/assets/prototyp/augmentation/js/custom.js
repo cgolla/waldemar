@@ -42,26 +42,17 @@ var World = {
 		*/
 
 		// Create overlay for page one
-
-		var imgOne = new AR.ImageResource("assets/wimbledon1_overlay2.png");
-        var overlayOne = new AR.ImageDrawable(imgOne, 1.0, {
-        	translate: {
-        		x: 0,
-        		y: 0
-        	}
-        });
-
         // TODO: viewportWidth + Heigth dynamically?
         // animationpath in uri is relative to assets-root
         var animationHtml = new AR.HtmlDrawable({
         	uri: "file:///android_asset/basics/animation.html?animationpath=prototyp\/augmentation\/assets\/animations\/waldemar_jump\.png"
-        }, 2.5 , {
+        }, 1.0 , {
         	viewportWidth: 300,
         	viewportHeight: 500,
         	backgroundColor: "#00000000",
         	translate: {
-        		x:0.3,
-        		y:-1.5
+        		x:0.2,
+        		y:-1.0
         	},
         	horizontalAnchor: AR.CONST.HORIZONTAL_ANCHOR.CENTER,
         	verticalAnchor: AR.CONST.VERTICAL_ANCHOR.BOTTOM,
@@ -73,9 +64,9 @@ var World = {
         });
 
 		// add drawable to marker
-		var pageOne = new AR.ImageTrackable(this.tracker, "Waldemar-Icon_v2", {
+		var pageOne = new AR.ImageTrackable(this.tracker, "01_WaldemarBach", {
 		    drawables: {
-		        cam: [overlayOne, animationHtml]
+		        cam: [animationHtml]
 		    },
 		    onImageRecognized: this.setScanStatusFound,
 			onImageLost: this.setScanStatusLost,
@@ -98,7 +89,7 @@ var World = {
 		/*
 			The AR.ImageTrackable for the second page uses the same tracker but with a different target name and the second overlay.
 		*/
-		var pageTwo = new AR.ImageTrackable(this.tracker, "EntenteichPreview", {
+		var pageTwo = new AR.ImageTrackable(this.tracker, "02_ErnaTeich", {
 			drawables: {
 				cam: overlayTwo
 			},

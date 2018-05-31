@@ -40,5 +40,5 @@ $(document).ready(function(){
 
 	initAnimation("../"+animation_path);
 	//initAnimation("../prototyp/augmentation/assets/animations/waldemar_jump.png");
-	startAnimation("sprite_waldemar_jump", 7);
+	startAnimation("sprite_waldemar_jump", 10);
 });

@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
     // UI Elements
     private ArchitectView architectView;
-    private ImageButton helpBtn;  //ImageButton to open help with
     private Button scanBtn; //Button to start/stop scanning for markers
 
     // Status
@@ -60,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         this.isScanning = false;
 
         //Init UI elements
-        this.helpBtn = (ImageButton)this.findViewById(R.id.imgBtn_ScanHelp);
         this.scanBtn = (Button)this.findViewById(R.id.btn_scanstart);
 
         // Init Callbacklistener WikitudeCallbackListener
@@ -162,7 +160,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Function starts scanning for markers by loading the augmentation HTML. Sets text on scanBtn accordingly.
+     * Function starts scanning for markers by loading the augmentation HTML. Sets text on scanBtn
+     * to "Stop" and animates the button so it's smaller and out of the way.
      */
     public void startScanning(){
         try {
@@ -185,14 +184,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Function stops scanning by loading an empty HTML. Sets text on scanBtn accordingly.
+     * Function stops scanning by loading no file. Sets text on scanBtn back to "START" and
+     * animates it so it's back at its original position and size.
      */
     public void stopScanning(){
         try {
             architectView.load(" ");
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Unable to load html file: " + e.getMessage());
+            System.out.println("Unable to load empty file: " + e.getMessage());
         }
 
         // set Btn Text to START & animate back to original size/position
