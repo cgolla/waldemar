@@ -16,6 +16,8 @@ $(document).ready(function(){
 	//handle click on hideouts 
 	$(".hideout-wrap").click(function(){
 
+		startAnimation("sprite_3500_row1",7);
+
 		// if there's a duckling, remove it and ++ the counter
 		if($(this).hasClass("hasDuckling")){
 			duckling_counter++;
@@ -28,6 +30,8 @@ $(document).ready(function(){
 			$(".notification-wrap").delay(1200).show("fast");
 		}
 	});
+
+
 
 });
 
