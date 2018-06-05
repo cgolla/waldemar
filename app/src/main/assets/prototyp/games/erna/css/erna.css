@@ -101,7 +101,7 @@ body {
 
 #hideout-3 .kueken,
 #hideout-10 .kueken {
-	margin-top: 20px;
+	margin-top: 45px;
 }
 
 #hideout-10 img{
@@ -127,6 +127,10 @@ body {
 	top: 28vh;
 }
 
+#hideout-5 .kueken {
+	margin-top: 40px;
+}
+
 /*Schilf*/
 #hideout-6 {
 	left: 12vw;
@@ -134,7 +138,7 @@ body {
 }
 
 #hideout-7 {
-	left: 66vw;
+	left: 60vw;
 	top: 31vh;
 }
 
@@ -143,6 +147,11 @@ body {
 	top: 35vh;
 }
 
+#hideout-6 .kueken,
+#hideout-7 .kueken,
+#hideout-8 .kueken {
+	margin-top: 40px;
+}
 
 
 /*====== KÜKEN ======*/

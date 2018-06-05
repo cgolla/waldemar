@@ -17,7 +17,7 @@ import com.wikitude.architect.ArchitectView;
 
 import java.io.IOException;
 
-import waldemarapp.waldemar.Helper.Helper;
+import waldemarapp.waldemar.Helper.WikitudeCallbackListener;
 import waldemarapp.waldemar.R;
 
 /**
@@ -27,8 +27,10 @@ public class MainActivity extends AppCompatActivity {
 
     /*========== VARS ===============================*/
     // Statics
+    private static final String TAG = "MainActivity"; // Tag for logging in console
     private static final String WIKITUDE_KEY = "Hp/fXCJzZARFV7BHmgN9jCn6OBerUtUPX4mF+2gHUV8zfq1tyxUWdrrnGodkDrM5mcqfq8H5udGDcHVJ/M/Hvezoa9nH0BaMpW/fRiJxFr/A4SWaL5Rokl80uazjrJvGX1WrE/OGVVKYkwO9N33KPbZ0MbHp4chQB95Z7M8k1kNTYWx0ZWRfX6XJ+mvnPZ8m15Lu5AQutwKqPx4HGlN1S2rmFw81DERjkY3l2M8Ek4fiK7cMPw2eH6BiBihHRi1a2eGBZ1eA6v8yONwKVSdPp6ScIClHTi94tRfixwg3ORDh/eWIKUJF49mTzMw6D+iqekHmWK3l4V6MUuNCmYvkzTz8gRFQMe+QAspnV50k9guTiIflynztBnIZc8XdfUMBKra8HMLyKqUuRqj0OLs3Biv+jAxVHJvJdgo2BcLAaXVysySImAwY/oAvmf5+x/xkaAW0excDl2mdEbMVaPd2nPx9/SCAGxwXPefyMKmdVwuO1A8EP4aY69wFKzzzJJbYl4efOjv0QCvRhaRTGsnCz2maJTwZIewO7NvZ6GivMBK6F8HiZKeN/32vfnWx2qtAUjnjMchqVGK3schnSpTfGhkX5qMSwUkxqX3iv6VI6dsUMj0i15m8tGDK/xiLlan8D4vtoEFeVJQgoexYnFWS9HROybQWFH1JnFkdCw0NnWX+4LN7Fd9rUJQPDr/KRLKs3Pl/sCnlq3HMYmikqSXTMg==";
     private static final int CAMERA_PERMISSION_CODE = 221; //random number necessary to request camera permission
+
 
     // UI Elements
     private ArchitectView architectView;
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean isScanning; //true if wikitude is loading AR World (or tries to)
 
     // etc.
-    private Helper Helper; // Listens for info on what was scanned
+    private WikitudeCallbackListener Helper; // Listens for info on what was scanned
 
     /*========== LIFE CYCLE EVENTS ===============================*/
 
@@ -61,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
         this.helpBtn = (ImageButton)this.findViewById(R.id.imgBtn_ScanHelp);
         this.scanBtn = (Button)this.findViewById(R.id.btn_scanstart);
 
-        // Init Callbacklistener Helper
-        Helper = new Helper(MainActivity.this);
+        // Init Callbacklistener WikitudeCallbackListener
+        Helper = new WikitudeCallbackListener(MainActivity.this);
         architectView.registerWorldLoadedListener(Helper);
         architectView.addArchitectJavaScriptInterfaceListener(Helper);
     }
@@ -78,25 +80,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Scan starten
                 if(!isScanning){
-                    try {
-                        architectView.load("prototyp/augmentation/index.html");
-                        scanBtn.setText(R.string.scanbtn_stop);
-                        isScanning = true;
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        System.out.println("Unable to load html file: " + e.getMessage());
-                    }
+                    startScanning();
                 }
                 // Scan beenden
                 else {
-                    try {
-                        architectView.load(" ");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        System.out.println("Unable to load html file: " + e.getMessage());
-                    }
-                    scanBtn.setText(R.string.scanbtn_start);
-                    isScanning = false;
+                    stopScanning();
                 }
             }
         });
@@ -112,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         architectView.onPause();
+        stopScanning();
     }
 
     @Override
@@ -152,15 +141,48 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void toggleScanButton(String action){
-        if (action == "hide"){
-
+    /**
+     * Functions toggles visisbility of scanBtn between visible and invisible.
+     * @param hide Boolean. Set true if you want to hide the button, false to show it.
+     */
+    public void toggleScanButton(boolean hide){
+        if (hide){
             this.scanBtn.setVisibility(View.INVISIBLE);
         }
         else{
             this.scanBtn.setVisibility(View.VISIBLE);
         }
 
+    }
+
+    /**
+     * Function starts scanning for markers by loading the augmentation HTML. Sets text on scanBtn accordingly.
+     */
+    public void startScanning(){
+        try {
+            architectView.load("prototyp/augmentation/index.html");
+            scanBtn.setText(R.string.scanbtn_stop);
+            // ToDo: animate btn size + position
+            isScanning = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Unable to load html file: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Function stops scanning by loading an empty HTML. Sets text on scanBtn accordingly.
+     */
+    public void stopScanning(){
+        try {
+            architectView.load(" ");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Unable to load html file: " + e.getMessage());
+        }
+        scanBtn.setText(R.string.scanbtn_start);
+        // ToDo: animate btn size + position
+        isScanning = false;
     }
 
     /*========== GETTER & SETTER ===============================*/
