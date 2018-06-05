@@ -38,13 +38,22 @@ var Animation = {
 	},
 
 	/**
-	* Function starts the animation inside .animationWrap by assigning the css-animation-property.
+	* Function starts the animation inside $(animationSelector) by assigning the css-animation-property.
 	*/
 	startAnimation: function(){
 		var css_animation = this.animation_name + " " + this.frame_number*0.1 + "s steps("+this.frame_number+") "+this.iterations+"";
 		console.log("CSS ANIMATION: "+css_animation);
 		$(this.animation_selector).css({
 			"animation": css_animation
+		});
+	},
+
+	/**
+	* Function stops the animation inside $(animationSelector) by removing the css-animation-property.
+	*/
+	stopAnimation: function(){
+		$(this.animation_selector).css({
+			"animation": "none"
 		});
 	},
 

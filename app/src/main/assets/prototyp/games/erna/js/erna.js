@@ -5,7 +5,7 @@ var hideout_base_selector = "#hideout-"; //baseselector for hideouts, will be co
 var hideout_number = 7; // number of hideouts. Is automatically counted once document is readey.
 var duckling_counter = 0; //number of ducklings that have already been discovered
 var help_after = 5000; //amount of miliseconds after which ducklings should hint at where they are
-
+var help_counter = 0;  //counter for helper
 
 // ========= ON DOCUMENT READY
 $(document).ready(function(){
@@ -14,7 +14,7 @@ $(document).ready(function(){
 	hideDucklings();
 
 
-	//handle click on hideouts 
+	//----- CLICKS ON HIDEOUTS
 	$(".hideout-wrap").click(function(){	
 
 		// if there's a duckling, remove it and ++ the counter
@@ -33,6 +33,15 @@ $(document).ready(function(){
 			$(".notification-wrap").delay(1200).show("fast");
 		}
 	});
+
+	// ---- HINTS IF NO DUCKLING FOUND
+	setInterval(function(){
+		animateDuckling($(ducklings[help_counter]));
+		help_counter ++;
+		if(help_counter > ducklings.length){
+			help_counter = 0;
+		}
+	}, help_after);
 
 
 
@@ -76,11 +85,15 @@ function hideDucklings(){
 
 /**
 * Function initiates an Animation based on any element that can be selected with ducklingselector.
+* Stops the animation that ran before.
 * @param ducklingEl DOM-element with a spritesheet attached as its background-image. Default is $(".kueken").
 * @param frame_number int; number of frames the animation has. Default is 7.
 * @param sprite_row int; which row of the spritesheet is to be used? Default is 1.
 */
 function animateDuckling(ducklingEl=$(".kueken"), frame_number=7, sprite_row=1){
+
+	Animation.stopAnimation();
+
 	Animation.frame_number = frame_number;
 	Animation.frame_width = ducklingEl.width();
 	Animation.frame_height = ducklingEl.height();
