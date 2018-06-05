@@ -11,8 +11,12 @@ var Animation = {
 	sprite_width: 3000,		// width of the complete spritesheet
 	sprite_height: 1000,	// heigth of the complete spritesheet
 	sprite_filename: "../prototyp/augmentation/assets/animations/waldemar_jump.png", //path to spritesheet
+	sprite_row: 0, 			// which row in the spritesheet shall be animated?
 	iterations: "infinite",	// number of times to run the animation
-	animation_name: "sprite_3000_row0", //TODO: REMOVE; BUILD KEYFRAMES DYNAMICALLY
+	animation_selector: ".animationWrap", // selector for element that holds the animation
+
+	animation_name: "spriteanimation", //TODO: REMOVE; BUILD KEYFRAMES DYNAMICALLY
+	
 	
 
 	/**
@@ -23,7 +27,7 @@ var Animation = {
 		var backgroundImg = "url('"+this.sprite_filename+"')";
 		console.log("AnimationFilename: "+backgroundImg);
 
-		$(".animationWrap").css({
+		$(this.animation_selector).css({
 			"background-image": backgroundImg,
 			"width": this.frame_width,
 			"height": this.frame_height
@@ -32,14 +36,43 @@ var Animation = {
 
 	/**
 	* Function starts the animation inside .animationWrap by assigning the css-animation-property.
-	* TODO: animation_name isn't passed anymore -> build @keyframes dynamically
 	*/
 	startAnimation: function(){
 		var css_animation = this.animation_name + " " + this.frame_number*0.1 + "s steps("+this.frame_number+") "+this.iterations+"";
 		console.log("CSS ANIMATION: "+css_animation);
-		$(".animationWrap").css({
+		$(this.animation_selector).css({
 			"animation": css_animation
 		});
+	},
+
+
+	/**
+	* Function builds css-keyframes rules dynamically depending on viewport width/height, spritesheet size etc.	
+	*/
+	buildKeyframes: function(){		
+
+		// calculate background positions of spritesheet
+		var posX_0 = "0"+this.frame_unit; 											// X-Position at beginning of animation (always 0)
+		var posX_100 = "-"+(this.frame_width*this.frame_number)+this.frame_unit;	// X-Position at end of animation
+		var posY = (this.frame_height*this.sprite_row)+this.frame_unit;				// Y-Position (= which row of spritesheet)
+
+		// build keyframe rules from the position-values
+		var cssString_0 = "0% {background-position: "+posX_0+" "+posY+";}";
+		var cssString_100 = "100% {background-position: "+posX_100+" "+posY+";}";
+
+		console.log("framesize: "+this.frame_width+" x "+this.frame_height);
+		console.log("posX: "+posX_0+" "+posX_100+ " posY: "+posY);
+		console.log("CSS 0%: "+cssString_0);
+		console.log("CSS 100%: "+cssString_100);
+
+
+		//put new Keyframes into animation css
+		var styleEl = document.getElementById("keyframeRules");
+		var stylesheet = styleEl.sheet;
+		stylesheet.insertRule("@keyframes "+this.animation_name+"{"
+			+ cssString_0
+			+ cssString_100
+			+ "}", 0);
 	}
 }
 
@@ -86,6 +119,12 @@ $(document).ready(function(){
 	//get filename from URL's GET-params
 	var url = new URL(window.location);
 	var animation_path = url.searchParams.get("animationpath");
+
+	// put an extra stylesheet into the doc (will hold dynamic keyframe-rules)
+	var animationCss = document.createElement('style');
+	animationCss.id= "keyframeRules";
+	animationCss.type= "text/css";
+	document.head.appendChild( animationCss );
 
 	// if animation has been passed in the URL, play it
 	if(animation_path != undefined && animation_path != ""){

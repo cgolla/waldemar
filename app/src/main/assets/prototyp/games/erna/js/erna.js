@@ -14,9 +14,17 @@ $(document).ready(function(){
 
 
 	//handle click on hideouts 
-	$(".hideout-wrap").click(function(){
+	$(".hideout-wrap").click(function(){	
 
-		startAnimation("sprite_3500_row1",7);
+
+
+		Animation.frame_number = 7;
+		Animation.frame_width = $(this).find(".kueken").css("width");
+		Animation.sprite_row = 1;
+		Animation.buildKeyframes(); //TODO rmv
+		Animation.startAnimation(); 
+
+
 
 		// if there's a duckling, remove it and ++ the counter
 		if($(this).hasClass("hasDuckling")){
