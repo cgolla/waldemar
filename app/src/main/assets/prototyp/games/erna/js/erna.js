@@ -4,9 +4,10 @@ var ducklings = ["#karl", "#karl-heinz", "#karlotta"]; //selectors for duckling-
 var hideout_base_selector = "#hideout-"; //baseselector for hideouts, will be completed with ints (hideout_number)
 var hideout_number = 7; // number of hideouts. Is automatically counted once document is readey.
 var duckling_counter = 0; //number of ducklings that have already been discovered
+var help_after = 5000; //amount of miliseconds after which ducklings should hint at where they are
 
 
-// ========= DINGE TUN
+// ========= ON DOCUMENT READY
 $(document).ready(function(){
 
 	hideout_number = $(".hideout-wrap").length; //counting hideouts
@@ -16,21 +17,15 @@ $(document).ready(function(){
 	//handle click on hideouts 
 	$(".hideout-wrap").click(function(){	
 
-
-
-		Animation.frame_number = 7;
-		Animation.frame_width = $(this).find(".kueken").css("width");
-		Animation.sprite_row = 1;
-		Animation.buildKeyframes(); //TODO rmv
-		Animation.startAnimation(); 
-
-
-
 		// if there's a duckling, remove it and ++ the counter
 		if($(this).hasClass("hasDuckling")){
+
 			duckling_counter++;
 			$(this).removeClass("hasDuckling");
-			$(this).find(".kueken").css("z-index", "10").delay(800).hide("slow");
+			$(this).find(".kueken").css("z-index", "10").delay(1500).hide("slow");
+
+			animateDuckling($(this).find(".kueken"));
+
 		}
 
 		// if all ducklings have been found, YAY!
@@ -45,7 +40,6 @@ $(document).ready(function(){
 
 
 // ====== FUNCTIONS
-
 /**
 * Functions puts the duckling-divs (.kueken / var ducklings) into random hiding places 
 * (.hideout / var hideout_base_selector + var hideout_number).
@@ -78,4 +72,20 @@ function hideDucklings(){
 		$(hideout_base_selector+hideout_ids[i]).addClass("hasDuckling");
 	}
 
+}
+
+/**
+* Function initiates an Animation based on any element that can be selected with ducklingselector.
+* @param ducklingEl DOM-element with a spritesheet attached as its background-image. Default is $(".kueken").
+* @param frame_number int; number of frames the animation has. Default is 7.
+* @param sprite_row int; which row of the spritesheet is to be used? Default is 1.
+*/
+function animateDuckling(ducklingEl=$(".kueken"), frame_number=7, sprite_row=1){
+	Animation.frame_number = frame_number;
+	Animation.frame_width = ducklingEl.width();
+	Animation.frame_height = ducklingEl.height();
+	Animation.sprite_row = sprite_row;
+	Animation.animation_selector = "#"+ ducklingEl.attr("id");
+	Animation.buildKeyframes();
+	Animation.startAnimation(); 
 }
