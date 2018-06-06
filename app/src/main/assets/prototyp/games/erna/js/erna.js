@@ -81,8 +81,16 @@ function hideDucklings(){
 
 	// move the kueken-divs into their random hideouts, give hideouts extra class
 	for(i=0; i<ducklings.length; i++){
-		$(ducklings[i]).insertBefore(hideout_base_selector+hideout_ids[i]+" .hideout-front");
-		$(hideout_base_selector+hideout_ids[i]).addClass("hasDuckling");
+
+		console.log("Hiding duckling: "+ducklings[i]+" "+$(hideout_base_selector+hideout_ids[i]).attr("notfor"));
+		if($(hideout_base_selector+hideout_ids[i]).attr("notfor") != ducklings[i]){
+			$(ducklings[i]).insertBefore(hideout_base_selector+hideout_ids[i]+" .hideout-front");
+			$(hideout_base_selector+hideout_ids[i]).addClass("hasDuckling");
+		}else{
+			console.log("Combination of ducklings and hideouts didn't work. Retrying.");
+			hideDucklings();
+		}
+		
 	}
 
 }
