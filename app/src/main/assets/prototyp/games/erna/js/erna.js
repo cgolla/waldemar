@@ -4,7 +4,7 @@ var ducklings = ["#karl", "#karl-heinz", "#karlotta"]; //selectors for duckling-
 var hideout_base_selector = "#hideout-"; //baseselector for hideouts, will be completed with ints (hideout_number)
 var hideout_number = 7; // number of hideouts. Is automatically counted once document is readey.
 var duckling_counter = 0; //number of ducklings that have already been discovered
-var help_after = 5000; //amount of miliseconds after which ducklings should hint at where they are
+var help_timer = 5000; //amount of miliseconds after which ducklings should hint at where they are
 var help_counter = 0;  //counter for helper
 
 // ========= ON DOCUMENT READY
@@ -26,6 +26,10 @@ $(document).ready(function(){
 
 			animateDuckling($(this).find(".kueken"));
 
+			//show found duckling in statusbar
+			var duckling_id = $(this).find(".kueken").attr("id");
+			$(".status-bar ."+duckling_id).removeClass("missing").addClass("found");
+
 		}
 
 		// if all ducklings have been found, YAY!
@@ -34,14 +38,14 @@ $(document).ready(function(){
 		}
 	});
 
-	// ---- HINTS IF NO DUCKLING FOUND
+	// ---- ANIMATE DUCKLINGS TO GIVE HINTS
 	setInterval(function(){
 		animateDuckling($(ducklings[help_counter]));
 		help_counter ++;
-		if(help_counter > ducklings.length){
+		if(help_counter >= ducklings.length){
 			help_counter = 0;
 		}
-	}, help_after);
+	}, help_timer);
 
 
 
@@ -87,17 +91,28 @@ function hideDucklings(){
 * Function initiates an Animation based on any element that can be selected with ducklingselector.
 * Stops the animation that ran before.
 * @param ducklingEl DOM-element with a spritesheet attached as its background-image. Default is $(".kueken").
-* @param frame_number int; number of frames the animation has. Default is 7.
+* @param iterations int; how often should the animation play? Default is 3. Put "infinite" for loop.
 * @param sprite_row int; which row of the spritesheet is to be used? Default is 1.
 */
-function animateDuckling(ducklingEl=$(".kueken"), frame_number=7, sprite_row=1){
+function animateDuckling(ducklingEl=$(".kueken"), iterations = 3, sprite_row=1){
 
+	// try to get correct amount of frames from HTML
+	if(ducklingEl.attr("frames")){
+		var frame_number_arr = ducklingEl.attr("frames").split(","); //turn the "frames" attr into an array
+		var frame_number = frame_number_arr[sprite_row]; //get the number of frames in the spriterow
+	}else{
+		var frame_number = 7; //fallback if not specified in HTML
+	}
+	
+	// stop previous animations
 	Animation.stopAnimation();
 
+	// setup + play animation from start
 	Animation.frame_number = frame_number;
 	Animation.frame_width = ducklingEl.width();
 	Animation.frame_height = ducklingEl.height();
 	Animation.sprite_row = sprite_row;
+	Animation.iterations = iterations;
 	Animation.animation_selector = "#"+ ducklingEl.attr("id");
 	Animation.buildKeyframes();
 	Animation.startAnimation(); 

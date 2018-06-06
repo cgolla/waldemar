@@ -140,7 +140,6 @@ var World = {
 
         //show help text, when the help button is clicked
 	    $("body").on("click", ".helpButton", function(){
-		    console.log("Und?");
 		    $(".notification-wrap").fadeIn("fast");
 		    //hide scan button while that view is shown
 		    AR.platform.sendJSONObject({parameter:"hideScanButton"});
@@ -149,7 +148,6 @@ var World = {
 	    // close help text, when the OK-button is clicked
 	    // ! Really slow on Samsung Tablet !
 	    $("body").on("click", ".button-basic", function(){
-	    console.log("Closed for good");
 	    $(".notification-wrap").fadeOut("fast");
 	    // show scan button again
 	    AR.platform.sendJSONObject({parameter:"showScanButton"});

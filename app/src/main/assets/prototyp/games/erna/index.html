@@ -26,6 +26,7 @@
 	<script type="text/javascript" src="js/erna.js"></script>
 </head>
 <body>
+
 	<div class="background-wrap">
 
 
@@ -85,12 +86,26 @@
 		</div>
 
 		<!-- ===== KÜKEN ==== -->
-		<div class="kueken animationWrap" id="karl"></div>
-		<div class="kueken animationWrap" id="karl-heinz"></div>
-		<div class="kueken animationWrap" id="karlotta"></div>
+		<div class="kueken animationWrap" id="karl" frames="1,4"></div>
+		<div class="kueken animationWrap" id="karl-heinz" frames="1,6"></div>
+		<div class="kueken animationWrap" id="karlotta" frames="1,7"></div>
+		<!-- the frames-attr tells us how many frames the spritesheet has in each row -->
 		
 
 	</div> <!-- /.background-wrap -->
+
+
+	<div class="status-bar">
+		<div class="duckling-icon missing karl-heinz">
+			<div class="icon-wrap"><img src="assets/icon_karl-heinz.png"></div>
+		</div>
+		<div class="duckling-icon missing karl" >
+			<div class="icon-wrap"><img src="assets/icon_karl.png"></div>
+		</div>
+		<div class="duckling-icon missing karlotta" >
+			<div class="icon-wrap"><img src="assets/icon_karlotta.png"></div>
+		</div>
+	</div> <!-- /.status-bar -->
 
 	<div class="notification-wrap">
 		<div class="notification-bg"></div>
@@ -106,6 +121,6 @@
 				<a href="#">Okay</a>
 			</div>
 		</div>
-	</div>
+	</div> <!-- /.notification-wrap -->
 </body>
 </html>

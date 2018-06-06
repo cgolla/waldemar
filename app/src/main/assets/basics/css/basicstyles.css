@@ -12,6 +12,8 @@
 html, body {
 	font-family: "Patrick Hand", "Chelsea Market", sans-serif;
 	font-stretch: 2px;
+	margin: 0;
+	padding: 0;
 }
 
 img {
@@ -42,7 +44,7 @@ Halstuch-Rot: #f06172 (R24)
 }
 
 .notification {
-	position: fixed;
+	position: absolute;
 	width: 80%;
 	height: auto;
 	margin: auto;

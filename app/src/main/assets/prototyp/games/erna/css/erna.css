@@ -8,6 +8,61 @@ body {
 	background-size: 50%;
 }
 
+.notification {
+	top: 75px;
+	position: absolute;
+}
+
+
+/* ====== STATUS BAR */
+.status-bar {
+	border-bottom: 5px dashed #0064a8;
+	position: fixed;
+	width: calc(100% - 20px);
+	background-color: rgba(94, 167, 218, .5);
+	padding: 10px;
+	text-align: right;
+	transition: all 0.5s ease-in-out 0s;
+}
+
+.status-bar .duckling-icon {
+    display: inline-block;
+    padding: 0px;
+    text-align: center;
+    line-height: 20px;
+    color: #ffbd3f;
+    margin: 0px 15px 0px 5px;
+    display: inline-block;
+    font-family: "Chelsea Market";
+    position: relative;
+}
+
+.status-bar .duckling-icon .icon-wrap {
+	overflow: hidden;
+	background-color: #0064a8;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
+
+.status-bar .duckling-icon.missing {
+	filter: grayscale(100%);
+}
+
+.status-bar .duckling-icon.found::after {
+	content: "✔";
+	display: block;
+	font-size: 40px;
+	position: absolute;
+	bottom: 0px;
+	left: 16px;
+	color:#159C25;
+	text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+}
+
+
+/* ====== MAIN STAGE */
+
 .background-wrap {
 	background-image: url("../assets/bg_bushes.png");
 	background-size: 30%;
@@ -158,13 +213,12 @@ body {
 .kueken {
 	width: 12vw;
 	height: 12vw;
-	background-size: 700%; /*Wert für 7 Frames. Bei 8 Frames entsprechend 800%*/
+	background-size: 700%; /*Maximalanzahl der Frames im Spritesheet * 100*/
 	background-position: 0px 0px;
 	position: relative;
 	margin: auto;
-	/*z-index: 2;*/
-	min-width: 50px;
-	min-height: 50px;
+	min-width: 75px;
+	min-height: 75px;
 	left: 5%;
 	margin-top: 10%;
 }
