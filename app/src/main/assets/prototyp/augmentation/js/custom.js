@@ -1,6 +1,7 @@
 var textScanning = "Suche Marker...";
 var textFound = "Marker gefunden!";
 
+
 var World = {
 	loaded: false,
 
@@ -57,25 +58,13 @@ var World = {
         	horizontalAnchor: AR.CONST.HORIZONTAL_ANCHOR.CENTER,
         	verticalAnchor: AR.CONST.VERTICAL_ANCHOR.BOTTOM,
         	clickThroughEnabled: true,
-        	allowDocumentLocationChanges: false,
+        	allowDocumentLocationChanges: true,
         	onDocumentLocationChanged: function onDocumentLocationChangedFn(uri) {
         		AR.context.openInBrowser(uri);
         	}
         });
 
-		// add drawable to marker
-		var pageOne = new AR.ImageTrackable(this.tracker, "01_WaldemarBach", {
-		    drawables: {
-		        cam: [animationHtml]
-		    },
-		    onImageRecognized: this.setScanStatusFound,
-			onImageLost: this.setScanStatusLost,
-            onError: function(errorMessage) {
-                alert(errorMessage);
-            }
-		});
-
-		/*
+        /*
 			Similar to the first part, the image resource and the AR.ImageDrawable for the second overlay are created.
 		*/
 		var imgTwo = new AR.ImageResource("assets/wimbledon2_overlay.png");
@@ -86,6 +75,19 @@ var World = {
 			}
 		});
 
+		// add drawable to marker
+		var pageOne = new AR.ImageTrackable(this.tracker, "01_WaldemarBach", {
+		    drawables: {
+		        cam: overlayTwo
+		    },
+		    onImageRecognized: this.setScanStatusFound,
+			onImageLost: this.setScanStatusLost,
+            onError: function(errorMessage) {
+                console.log("An error occured: "+errorMessage);
+            }
+		});
+
+		
 		/*
 			The AR.ImageTrackable for the second page uses the same tracker but with a different target name and the second overlay.
 		*/
@@ -94,13 +96,15 @@ var World = {
 				cam: overlayTwo
 			},
 			onImageRecognized: function(){
-			    this.setScanStatusFound;
+				console.log("Recognized Erna's pond :D");
+			    World.setScanStatusFound();
 			    // sending info about desired game to the listener
 			    AR.platform.sendJSONObject({parameter:"startGameHub(erna)"});
 			},
 			onImageLost: this.setScanStatusLost,
             onError: function(errorMessage) {
-            	alert(errorMessage);
+            	alert("Fehler bei Marker Erna: "+errorMessage);
+            	console.log("Fehler bei Marker Erna: "+errorMessage);
             }
 		});
 
@@ -108,6 +112,7 @@ var World = {
 
 	setScanStatusFound: function() {
 		//if (!World.loaded) {
+			console.log("FOUND MARKER :D");
 			$(".displayFrame").fadeIn("slow");
 			$(".scanStatusWrap p").html(textFound);
 			$(".scanStatusWrap").css({
@@ -124,6 +129,7 @@ var World = {
 	},
 
 	setScanStatusLost: function() {
+			console.log("LOST MARKER :(");
 			$(".displayFrame").fadeOut("fast");
 			$(".scanStatusWrap").css({
 				"background-color" : "rgba(255, 255, 255, .5)",
@@ -131,7 +137,6 @@ var World = {
 			});
 			$(".scanStatusWrap p").html(textScanning);
 			$(".scanStatusWrap").show("slow");
-
 	},
 
     //Once the tracker loaded all its target images, the function worldLoaded() is called.
@@ -157,8 +162,6 @@ var World = {
     	setTimeout(function(){
     		$(".helpButton").fadeIn("slow");}, 5000
     	);
-
-
 	}
 
 

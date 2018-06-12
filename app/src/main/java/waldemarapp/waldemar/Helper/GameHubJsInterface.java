@@ -41,6 +41,7 @@ public class GameHubJsInterface {
 
     /**
      * Finishes the current GameHubActivity. Calls startMainActivity() if finishing fails.
+     * Called from inside JavaScript by using GameHub.finishGameHub.
      */
     @JavascriptInterface
     public void finishGameHub() {

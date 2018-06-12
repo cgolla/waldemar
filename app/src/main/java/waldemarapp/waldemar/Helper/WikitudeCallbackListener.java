@@ -50,7 +50,6 @@ public class WikitudeCallbackListener implements ArchitectJavaScriptInterfaceLis
             System.out.println("Error: unable to parse jsonObject");
         } // Ernas Entensuchspiel
         if (s.contains("startGameHub(erna)")) {
-
             myMainActivity.startGameHub("erna");
         }// toggle Scan-Button to be transparent, when helpText is shown
         else if (s.contains("hideScanButton")){

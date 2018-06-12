@@ -50,7 +50,10 @@
         android:id="@+id/btn_scanstart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="170dp"
+        android:alpha="0"
         android:background="@drawable/shape_roundedrectangle"
         android:paddingBottom="@dimen/spacing_medium"
         android:paddingEnd="@dimen/spacing_large"
@@ -60,7 +63,6 @@
         android:textAllCaps="true"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/textsize_xxlarge"
-        android:textStyle="bold"
-        android:alpha="0"/>
+        android:textStyle="bold" />
 
 </RelativeLayout>

@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -172,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
             scanBtn.animate()
                     .scaleX(0.5f)
                     .scaleY(0.5f)
-                    .translationY(750f)
+                    .translationY(450f)
                     .setStartDelay(0)
                     .setDuration(200);
 
@@ -188,11 +189,17 @@ public class MainActivity extends AppCompatActivity {
      * animates it so it's back at its original position and size.
      */
     public void stopScanning(){
+
+        Log.d(TAG,"Stop button was pressed.");
+
         try {
-            architectView.load(" ");
-        } catch (IOException e) {
+            Log.d(TAG,"Trying to load empty file.");
+            architectView.load("prototyp/augmentation/empty.html");
+            Log.d(TAG,"Loaded empty file.");
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Unable to load empty file: " + e.getMessage());
+            Log.d(TAG,"Unable to load empty file. "+ e.getMessage());
         }
 
         // set Btn Text to START & animate back to original size/position
