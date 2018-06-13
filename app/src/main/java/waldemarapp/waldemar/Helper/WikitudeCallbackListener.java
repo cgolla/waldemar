@@ -2,6 +2,7 @@ package waldemarapp.waldemar.Helper;
 
 
 import android.content.Intent;
+import android.util.Log;
 
 import com.wikitude.architect.ArchitectJavaScriptInterfaceListener;
 import com.wikitude.architect.ArchitectView;
@@ -16,7 +17,7 @@ public class WikitudeCallbackListener implements ArchitectJavaScriptInterfaceLis
 
 
     /*========== VARS ===============================*/
-    private static final String TAG = "WikitudeCallbackListener"; // Tag for logging in console
+    private static final String TAG = "WikitudeCallbackListen"; // Tag for logging in console
 
     private MainActivity myMainActivity = new MainActivity();
 

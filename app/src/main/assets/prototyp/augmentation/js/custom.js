@@ -11,23 +11,6 @@ var World = {
 
 	createOverlays: function createOverlaysFn() {
 
-		/*
-			First an AR.ImageTracker needs to be created in order to start the recognition engine.
-			It is initialized with a AR.TargetCollectionResource specific to the target collection
-			that should be used. Optional parameters are passed as object in the last argument.
-			In this case a callback function for the onTargetsLoaded trigger is set.
-			Once the tracker loaded all its target images, the function worldLoaded() is called.
-
-			Important: If you replace the tracker file with your own, make sure to change the target
-			name accordingly.
-			Use a specific target name to respond only to a certain target or use a wildcard to
-			respond to any or a certain group of targets.
-
-			Adding multiple targets to a target collection is straightforward.
-			Simply follow our Target Management Tool documentation. Each target in the target
-			collection is identified by its target name. By using this target name, it is possible
-			to create an AR.ImageTrackable for every target in the target collection.
-		*/
 		this.targetCollectionResource = new AR.TargetCollectionResource("assets/waldemar_targets.wtc", {
 		});
 
@@ -41,12 +24,12 @@ var World = {
 		/*
 			The next step is to create the augmentation. In this example an image resource is created and passed to the AR.ImageDrawable. A drawable is a visual component that can be connected to an IR target (AR.ImageTrackable) or a geolocated object (AR.GeoObject). The AR.ImageDrawable is initialized by the image and its size. Optional parameters allow for position it relative to the recognized target.
 		*/
-
 		// Create overlay for page one
-        // TODO: viewportWidth + Heigth dynamically?
-        // animationpath in uri is relative to assets-root
+        // animationpath in uri/param is relative to assets-root
+        var getparam ="?animationpath=prototyp\/augmentation\/assets\/animations\/waldemar_jump\.png";
+        //var getparam ="";
         var animationHtml = new AR.HtmlDrawable({
-        	uri: "file:///android_asset/basics/animation.html?animationpath=prototyp\/augmentation\/assets\/animations\/waldemar_jump\.png"
+        	uri: "file:///android_asset/basics/animation.html"+getparam,
         }, 1.0 , {
         	viewportWidth: 300,
         	viewportHeight: 500,
@@ -60,6 +43,7 @@ var World = {
         	clickThroughEnabled: true,
         	allowDocumentLocationChanges: true,
         	onDocumentLocationChanged: function onDocumentLocationChangedFn(uri) {
+        		console.log("ANIMATIONHTML: Document Location changed "+uri);
         		AR.context.openInBrowser(uri);
         	}
         });
@@ -78,7 +62,7 @@ var World = {
 		// add drawable to marker
 		var pageOne = new AR.ImageTrackable(this.tracker, "01_WaldemarBach", {
 		    drawables: {
-		        cam: overlayTwo
+		        cam: [overlayTwo, animationHtml]
 		    },
 		    onImageRecognized: this.setScanStatusFound,
 			onImageLost: this.setScanStatusLost,
@@ -162,8 +146,27 @@ var World = {
     	setTimeout(function(){
     		$(".helpButton").fadeIn("slow");}, 5000
     	);
-	}
+	},
+	
+	/** function to close everyting. Destroys all trackers to avoid problems 
+	* with drawables on close (seem to block UI-thread sometimes).
+	* Hides other html overlays as well.
+	*/
+	close: function closeFn() {
 
+		// hiding/removing UI elements
+		$(".scanStatusWrap").hide("fast");
+		$(".scanStatusWrap").remove();
+	    $(".helpButton").hide("fast");
+	    $(".helpButton").remove();
+	    $(".notification-wrap").fadeOut("fast");
+	    $(".displayFrame").fadeOut("fast");
+
+	    // make sure no drawables bring down system when replacing architectView's loaded HTML
+	    World.loaded = false;
+		this.tracker.destroy();
+		
+	}
 
 };
 

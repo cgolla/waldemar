@@ -3,6 +3,7 @@ package waldemarapp.waldemar.ViewController;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     // etc.
     private WikitudeCallbackListener Helper; // Listens for info on what was scanned
+    private Handler mHandler;
 
     /*========== LIFE CYCLE EVENTS ===============================*/
 
@@ -66,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         Helper = new WikitudeCallbackListener(MainActivity.this);
         architectView.registerWorldLoadedListener(Helper);
         architectView.addArchitectJavaScriptInterfaceListener(Helper);
+
+        this.mHandler = new Handler();
     }
 
     @Override
@@ -166,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void startScanning(){
         try {
+            Log.d(TAG, "Loading augmentation html.");
             architectView.load("prototyp/augmentation/index.html");
 
             // set Btn Text to STOP & animate it to be smaller/further down
@@ -190,17 +195,21 @@ public class MainActivity extends AppCompatActivity {
      */
     public void stopScanning(){
 
-        Log.d(TAG,"Stop button was pressed.");
+            architectView.callJavascript("World.close();");
 
-        try {
-            Log.d(TAG,"Trying to load empty file.");
-            architectView.load("prototyp/augmentation/empty.html");
-            Log.d(TAG,"Loaded empty file.");
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Unable to load empty file: " + e.getMessage());
-            Log.d(TAG,"Unable to load empty file. "+ e.getMessage());
-        }
+            mHandler.postDelayed(new Runnable() {
+                public void run() {
+                    try {
+                        Log.d(TAG,"Trying to load empty file.");
+                    architectView.load("prototyp/augmentation/empty.html");
+                    Log.d(TAG,"Loaded empty file.");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.d(TAG,"Unable to load empty file. "+ e.getMessage());
+                    }
+                }
+            }, 500);
+
 
         // set Btn Text to START & animate back to original size/position
         scanBtn.setText(R.string.scanbtn_start);
