@@ -1,0 +1,43 @@
+img {
+	max-width: 100%;
+}
+
+body {
+	background-image: url("../assets/himmel.png");
+	background-repeat: repeat;
+	background-size: 50%;
+}
+
+
+/* ====== MAIN STAGE */
+
+.background-wrap {
+	background-image: url("../assets/stamm.png");
+	background-size: 70%;
+	background-repeat: repeat-y;
+	background-position: left top;
+	/*background-color: #799C7C;*/
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+.essen_erna{
+}
+
+.essen_waldemar{
+}
+
+.essen_iggy{
+}
+
+.icon_erna{
+}
+
+.icon_waldemar{
+}
+
+.icon_iggy{
+}
