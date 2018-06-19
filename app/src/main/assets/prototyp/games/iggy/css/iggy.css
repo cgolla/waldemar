@@ -1,0 +1,57 @@
+img {
+	max-width: 100%;
+}
+
+body {
+	background-image: url("../assets/himmel.png");
+	background-repeat: repeat;
+	background-size: 50%;
+}
+
+
+/* ====== MAIN STAGE */
+
+.background-wrap {
+	background-image: url("../assets/stamm.png");
+	background-size: 70%;
+	background-repeat: repeat-y;
+	background-position: left top;
+	/*background-color: #799C7C;*/
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+.ast-wrap {
+	width: 90%;
+	position: absolute;
+	left: 0px;
+	top: 10%;
+}
+
+.ast {
+	position: relative;
+}
+
+.apfel, .apfel-falling {
+	width: 15%;
+	position: absolute;
+	left: 50%;
+	top: 15%;
+	transition: all .5s ease-in-out 0s;
+}
+
+.apfel-falling {
+	left: 44%;
+	top: 13%;
+	display: none;
+}
+
+@keyframes shake {
+	0% {transform: rotate(0deg);}
+	45% {transform: rotate(15deg);}
+	50% {transform: rotate(10deg);}
+	100% {transform: rotate(-10deg);}
+}
