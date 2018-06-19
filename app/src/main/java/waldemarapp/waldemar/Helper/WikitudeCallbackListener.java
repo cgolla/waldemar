@@ -52,6 +52,9 @@ public class WikitudeCallbackListener implements ArchitectJavaScriptInterfaceLis
         } // Ernas Entensuchspiel
         if (s.contains("startGameHub(erna)")) {
             myMainActivity.startGameHub("erna");
+        }// Ernas Entensuchspiel
+        else if (s.contains("startGameHub(iggy)")) {
+            myMainActivity.startGameHub("iggy");
         }// toggle Scan-Button to be transparent, when helpText is shown
         else if (s.contains("hideScanButton")){
             myMainActivity.runOnUiThread (new Thread(new Runnable() {

@@ -120,7 +120,7 @@ var World = {
 				console.log("Recognized Erna's pond :D");
 			    World.setScanStatusFound();
 			    // sending info about desired game to the listener
-			    AR.platform.sendJSONObject({parameter:"startGameHub(erna)"});
+			    AR.platform.sendJSONObject({parameter:"startGameHub(iggy)"});
 			},
 			onImageLost: this.setScanStatusLost,
             onError: function(errorMessage) {
