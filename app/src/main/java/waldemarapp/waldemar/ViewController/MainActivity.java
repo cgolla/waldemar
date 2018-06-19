@@ -162,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
         else{
             this.scanBtn.setVisibility(View.VISIBLE);
         }
-
     }
 
     /**

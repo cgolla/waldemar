@@ -91,7 +91,17 @@ var World = {
 		    drawables: {
 		        cam: [overlayTwo, illustrationVid]
 		    },
-		    onImageRecognized: this.setScanStatusFound,
+		    onImageRecognized: function(){
+		    	World.setScanStatusFound;
+		    	if (this.hasVideoStarted) {
+            		illustrationVid.resume();
+		        }
+		        else {
+		            this.hasVideoStarted = true;
+		            illustrationVid.play(1);
+		        }
+		        World.removeLoadingBar();   
+		    },
 			onImageLost: this.setScanStatusLost,
             onError: function(errorMessage) {
                 console.log("An error occured: "+errorMessage);
