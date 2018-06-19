@@ -20,10 +20,7 @@ $(document).ready(function(){
 
 			  // WINNING
 			  if(shakeCount == shakeCountTarget){
-					console.log("I WAS SHOOK AT LEAST 3 TIMES!");
-					window.removeEventListener('devicemotion', deviceMotionHandler);
-					dropApple();
-					$(".notification-wrap").delay(1200).show("fast");
+					gameWon();
 			  }
 			}
 			
@@ -76,4 +73,15 @@ function dropApple(){
 	$(".apfel-falling").css({
 		top: appleTop
 	});
+}
+
+
+/**
+* Function is called when game was won.
+*/
+function gameWon(){
+	console.log("I WAS SHOOK AT LEAST 3 TIMES!");
+	window.removeEventListener('devicemotion', deviceMotionHandler);
+	dropApple();
+	$(".notification-wrap").delay(1000).show("fast");
 }

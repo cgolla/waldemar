@@ -49,13 +49,13 @@ Halstuch-Rot: #f06172 (R24)
 	height: auto;
 	margin: auto;
 	left: 50%;
-	transform: translate(-50%, 0);
+	transform: translate(-50%, -50%);
 	background-color: #ffbd3f;
 	padding: 5%;
 	border-radius: 1%;
 	border: 5px dashed #0064a8;
 	color: #0064a8;
-	top: 5%;
+	top: 50%;
 	overflow: visible;
 }
 
