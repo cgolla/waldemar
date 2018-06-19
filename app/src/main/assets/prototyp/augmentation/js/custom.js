@@ -21,10 +21,11 @@ var World = {
             }
 		});
 
-		/*
-			The next step is to create the augmentation. In this example an image resource is created and passed to the AR.ImageDrawable. A drawable is a visual component that can be connected to an IR target (AR.ImageTrackable) or a geolocated object (AR.GeoObject). The AR.ImageDrawable is initialized by the image and its size. Optional parameters allow for position it relative to the recognized target.
-		*/
-		// Create overlay for page one
+		/*===========================================
+		=            OVERLAYS / DRAWABLES           =
+		============================================*/		
+		
+		// -------- html animation overlay
         // animationpath in uri/param is relative to assets-root
         var getparam ="?animationpath=prototyp\/augmentation\/assets\/animations\/waldemar_jump\.png";
         //var getparam ="";
@@ -48,9 +49,8 @@ var World = {
         	}
         });
 
-        /*
-			Similar to the first part, the image resource and the AR.ImageDrawable for the second overlay are created.
-		*/
+        
+        // ------- "glitter" overlay
 		var imgTwo = new AR.ImageResource("assets/wimbledon2_overlay.png");
 		var overlayTwo = new AR.ImageDrawable(imgTwo, 1.0, {
 			translate: {
@@ -59,10 +59,37 @@ var World = {
 			}
 		});
 
+
+		// ------- video overlay
+		var illustrationVid = new AR.VideoDrawable(
+			"file:///android_asset/prototyp/augmentation/assets/animations/01_Waldemar_Bach.mp4", 1.0, {
+				translate: {
+					x: 0,
+					y: 0,
+					z: 0
+				},
+				isTransparent : false,
+				onPlaybackStarted : function () {
+					console.log("Started play_video 01_Waldemar_Bach.mp4");
+				},
+				onFinishedPlaying : function () {
+					console.log("Finished play_video 01_Waldemar_Bach.mp4");
+				},
+				onError : function (msg) {
+					console.log("An error occured. Message: "+msg);
+				}
+			}
+		);
+
+
+		/*================================
+		=            TRACKERS            =
+		================================*/		
+
 		// add drawable to marker
 		var pageOne = new AR.ImageTrackable(this.tracker, "01_WaldemarBach", {
 		    drawables: {
-		        cam: [overlayTwo, animationHtml]
+		        cam: [overlayTwo, illustrationVid]
 		    },
 		    onImageRecognized: this.setScanStatusFound,
 			onImageLost: this.setScanStatusLost,
@@ -165,11 +192,8 @@ var World = {
 	    // make sure no drawables bring down system when replacing architectView's loaded HTML
 	    World.loaded = false;
 		this.tracker.destroy();
-		
 	}
-
 };
-
 
 World.init();
 

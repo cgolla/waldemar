@@ -198,12 +198,13 @@ public class MainActivity extends AppCompatActivity {
 
             architectView.callJavascript("World.close();");
 
+            //wait before closing so Javascript gets chance to finish
             mHandler.postDelayed(new Runnable() {
                 public void run() {
                     try {
                         Log.d(TAG,"Trying to load empty file.");
-                    architectView.load("prototyp/augmentation/empty.html");
-                    Log.d(TAG,"Loaded empty file.");
+                        architectView.load("prototyp/augmentation/empty.html");
+                        Log.d(TAG,"Loaded empty file.");
                     } catch (Exception e) {
                         e.printStackTrace();
                         Log.d(TAG,"Unable to load empty file. "+ e.getMessage());
