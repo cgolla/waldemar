@@ -4,4 +4,8 @@ $(document).ready(function(){
 		GameHub.finishGameHub();
 	});
 
+	$(".mainview-close-btn").click(function(){
+    		$(".notification-wrap.manual").hide("fast");
+    	});
+
 });

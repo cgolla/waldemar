@@ -89,7 +89,7 @@ var World = {
 		// add drawable to marker
 		var pageOne = new AR.ImageTrackable(this.tracker, "01_WaldemarBach", {
 		    drawables: {
-		        cam: [overlayTwo, illustrationVid]
+		        cam: [illustrationVid]
 		    },
 		    onImageRecognized: function(){
 		    	World.setScanStatusFound;
@@ -120,12 +120,46 @@ var World = {
 				console.log("Recognized Erna's pond :D");
 			    World.setScanStatusFound();
 			    // sending info about desired game to the listener
-			    AR.platform.sendJSONObject({parameter:"startGameHub(iggy)"});
+			    AR.platform.sendJSONObject({parameter:"startGameHub(erna)"});
 			},
 			onImageLost: this.setScanStatusLost,
             onError: function(errorMessage) {
             	alert("Fehler bei Marker Erna: "+errorMessage);
             	console.log("Fehler bei Marker Erna: "+errorMessage);
+            }
+		});
+
+		var pageThree = new AR.ImageTrackable(this.tracker, "03_IggyApfelbaum", {
+			drawables: {
+				cam: overlayTwo
+			},
+			onImageRecognized: function(){
+				console.log("Recognized Iggy's tree :D");
+			    World.setScanStatusFound();
+			    // sending info about desired game to the listener
+			    AR.platform.sendJSONObject({parameter:"startGameHub(iggy)"});
+			},
+			onImageLost: this.setScanStatusLost,
+            onError: function(errorMessage) {
+            	alert("Fehler bei Marker Iggy: "+errorMessage);
+            	console.log("Fehler bei Marker Iggy: "+errorMessage);
+            }
+		});
+
+		var pageFour = new AR.ImageTrackable(this.tracker, "Waldemar-Icon_v2", {
+			drawables: {
+				cam: overlayTwo
+			},
+			onImageRecognized: function(){
+				console.log("Recognized Waldemar :D");
+			    World.setScanStatusFound();
+			    // sending info about desired game to the listener
+			    AR.platform.sendJSONObject({parameter:"startGameHub(tim)"});
+			},
+			onImageLost: this.setScanStatusLost,
+            onError: function(errorMessage) {
+            	alert("Fehler bei Marker Waldemar Icon: "+errorMessage);
+            	console.log("Fehler bei Marker Waldemar Icon: "+errorMessage);
             }
 		});
 
