@@ -1,7 +1,7 @@
 // ============ VARS
 	var shakeCount = 0;   // counter for shakes
 	var shakeCountTarget = 29; // targeted amount of shakes (roughly x 10)
-	var shakeHeight = 10; // which acceleration-value counts as a "shake"?
+	var shakeAcc = 10; // which acceleration-value counts as a "shake"?
 	var shakeDuration = 0.5; // duration of shaking-animation in seconds
 
 
@@ -12,7 +12,7 @@ $(document).ready(function(){
 			
 		// console.log("HELLO "+evt.acceleration.x);
 		setTimeout(function(){
-			if (evt.acceleration.x > shakeHeight) {
+			if (evt.acceleration.x > shakeAcc || evt.acceleration.y > shakeAcc || evt.acceleration.z > shakeAcc) {
 			  // jumpMax.x = evt.acceleration.x;
 			  console.log("I AM SHOOKETH "+shakeCount+" "+evt.acceleration.x);
 			  shakeCount = shakeCount+1;
@@ -83,5 +83,5 @@ function gameWon(){
 	console.log("I WAS SHOOK AT LEAST 3 TIMES!");
 	window.removeEventListener('devicemotion', deviceMotionHandler);
 	dropApple();
-	$(".notification-wrap").delay(1000).show("fast");
+	$(".end").delay(1000).show("fast");
 }

@@ -92,7 +92,7 @@ var World = {
 		        cam: [illustrationVid]
 		    },
 		    onImageRecognized: function(){
-		    	World.setScanStatusFound;
+		    	World.setScanStatusFound();
 		    	if (this.hasVideoStarted) {
             		illustrationVid.resume();
 		        }

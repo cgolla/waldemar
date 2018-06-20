@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
             scanBtn.animate()
                     .scaleX(0.5f)
                     .scaleY(0.5f)
-                    .translationY(450f)
+                    .translationY(350f)
                     .setStartDelay(0)
                     .setDuration(200);
 

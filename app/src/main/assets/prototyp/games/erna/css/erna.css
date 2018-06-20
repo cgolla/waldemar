@@ -8,11 +8,6 @@ body {
 	background-size: 50%;
 }
 
-.notification {
-	top: 75px;
-	position: absolute;
-}
-
 
 /* ====== STATUS BAR */
 .status-bar {
