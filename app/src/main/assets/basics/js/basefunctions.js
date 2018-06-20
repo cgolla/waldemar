@@ -5,7 +5,7 @@ $(document).ready(function(){
 	});
 
 	$(".mainview-close-btn").click(function(){
-    		$(".notification-wrap.manual").hide("fast");
-    	});
+    	$(".notification-wrap.manual").hide("fast");
+    });
 
 });

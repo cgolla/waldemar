@@ -51,8 +51,21 @@ body {
 	z-index: 10;
 }
 
-.icon {
+.essen_mini {
+	display: none;
 	position: absolute;
+	right: -10px;
+	width: 50%;
+	bottom: 0px;
+	z-index: 3;
+}
+
+.icon_wrap {
+	position: absolute;
+}
+
+.icon {
+	position: relative;
 	width: 20vw;
 	height: 20vw;
 	max-width: 100px;
@@ -60,11 +73,11 @@ body {
 	border-radius: 50%;
 	background-color: #ffbd3f;
 	text-align: center;
-	transform: translateX(-50%);
 	overflow: hidden;
 	box-shadow: 1px 1px 5px rgba(0,0,0,.4);
 	top: 0;
 	z-index: 2;
+	transition: all .6s ease-in-out 0s;
 }
 
 .icon.ui-droppable-hover {
@@ -73,9 +86,9 @@ body {
 
 
 .icon_erna{
-	left: 10vw;
+	left: 3%;
 }
 
 .icon_iggy{
-	left: 90vw;
+	right: 3%;
 }
