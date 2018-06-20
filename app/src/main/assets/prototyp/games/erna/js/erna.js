@@ -34,7 +34,7 @@ $(document).ready(function(){
 
 		// if all ducklings have been found, YAY!
 		if(duckling_counter == ducklings.length){
-			$(".notification-wrap").delay(1200).show("fast");
+			$(".end").delay(1200).show("fast");
 		}
 	});
 
