@@ -119,8 +119,10 @@ var World = {
 			onImageRecognized: function(){
 				console.log("Recognized Erna's pond :D");
 			    World.setScanStatusFound();
-			    // sending info about desired game to the listener
-			    AR.platform.sendJSONObject({parameter:"startGameHub(erna)"});
+			    setTimeout(function(){
+			    	// sending info about desired game to the listener
+			    	AR.platform.sendJSONObject({parameter:"startGameHub(erna)"});
+			    }, 1000);
 			},
 			onImageLost: this.setScanStatusLost,
             onError: function(errorMessage) {
@@ -136,8 +138,10 @@ var World = {
 			onImageRecognized: function(){
 				console.log("Recognized Iggy's tree :D");
 			    World.setScanStatusFound();
-			    // sending info about desired game to the listener
-			    AR.platform.sendJSONObject({parameter:"startGameHub(iggy)"});
+			    setTimeout(function(){
+			    	// sending info about desired game to the listener
+			    	AR.platform.sendJSONObject({parameter:"startGameHub(iggy)"});
+			    }, 1000);
 			},
 			onImageLost: this.setScanStatusLost,
             onError: function(errorMessage) {
@@ -146,15 +150,32 @@ var World = {
             }
 		});
 
-		var pageFour = new AR.ImageTrackable(this.tracker, "Waldemar-Icon_v2", {
+		var pageFour = new AR.ImageTrackable(this.tracker, "04_TimTablett", {
 			drawables: {
 				cam: overlayTwo
 			},
 			onImageRecognized: function(){
 				console.log("Recognized Waldemar :D");
 			    World.setScanStatusFound();
-			    // sending info about desired game to the listener
-			    AR.platform.sendJSONObject({parameter:"startGameHub(tim)"});
+			    setTimeout(function(){
+			    	// sending info about desired game to the listener
+			    	AR.platform.sendJSONObject({parameter:"startGameHub(tim)"});
+			    }, 1000);
+			},
+			onImageLost: this.setScanStatusLost,
+            onError: function(errorMessage) {
+            	alert("Fehler bei Marker Tim: "+errorMessage);
+            	console.log("Fehler bei Marker Tim: "+errorMessage);
+            }
+		});
+
+		var bonusMarker = new AR.ImageTrackable(this.tracker, "Waldemar-Icon_App", {
+			drawables: {
+				cam: animationHtml
+			},
+			onImageRecognized: function(){
+				console.log("Recognized Waldemar :D");
+			    World.setScanStatusFound();
 			},
 			onImageLost: this.setScanStatusLost,
             onError: function(errorMessage) {
