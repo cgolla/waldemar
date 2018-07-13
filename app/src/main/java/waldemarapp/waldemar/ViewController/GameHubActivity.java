@@ -41,6 +41,7 @@ public class GameHubActivity extends AppCompatActivity {
         webSettings.setSupportZoom(true);
         webSettings.setDefaultTextEncodingName("utf-8");
         webSettings.setTextZoom(100);
+        webSettings.setMediaPlaybackRequiresUserGesture(false);
 
         // add JsInterface so we can call Android from JS
         webview.addJavascriptInterface(new GameHubJsInterface(this), "GameHub");
