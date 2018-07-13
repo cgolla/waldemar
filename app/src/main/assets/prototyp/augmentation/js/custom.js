@@ -60,7 +60,7 @@ var World = {
 		});
 
 
-		// ------- video overlay
+		// ------- video overlays
 		var illustrationVid = new AR.VideoDrawable(
 			"file:///android_asset/prototyp/augmentation/assets/animations/01_Waldemar_Bach.mp4", 1.0, {
 				translate: {
@@ -74,6 +74,26 @@ var World = {
 				},
 				onFinishedPlaying : function () {
 					console.log("Finished play_video 01_Waldemar_Bach.mp4");
+				},
+				onError : function (msg) {
+					console.log("An error occured. Message: "+msg);
+				}
+			}
+		);
+
+		var iconVid = new AR.VideoDrawable(
+			"file:///android_asset/prototyp/augmentation/assets/animations/Waldemar_Wink.mp4", 1.0, {
+				translate: {
+					x: 0,
+					y: 0,
+					z: 0
+				},
+				isTransparent : true,
+				onPlaybackStarted : function () {
+					console.log("Started play_video Waldemar_Wink.mp4");
+				},
+				onFinishedPlaying : function () {
+					console.log("Finished play_video Waldemar_Wink.mp4");
 				},
 				onError : function (msg) {
 					console.log("An error occured. Message: "+msg);
@@ -155,7 +175,7 @@ var World = {
 				cam: overlayTwo
 			},
 			onImageRecognized: function(){
-				console.log("Recognized Waldemar :D");
+				console.log("Recognized Tims Tablett");
 			    World.setScanStatusFound();
 			    setTimeout(function(){
 			    	// sending info about desired game to the listener
@@ -171,11 +191,18 @@ var World = {
 
 		var bonusMarker = new AR.ImageTrackable(this.tracker, "Waldemar-Icon_App", {
 			drawables: {
-				cam: animationHtml
+				cam: [iconVid]
 			},
 			onImageRecognized: function(){
 				console.log("Recognized Waldemar :D");
 			    World.setScanStatusFound();
+			    if (this.hasVideoStarted) {
+            		iconVid.resume();
+		        }
+		        else {
+		            this.hasVideoStarted = true;
+		            iconVid.play(-1);
+		        }
 			},
 			onImageLost: this.setScanStatusLost,
             onError: function(errorMessage) {
